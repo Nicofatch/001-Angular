@@ -1,0 +1,12 @@
+<div class="list-group" style="margin-top:20px;">
+  <div data-ng-repeat="spot in spots">
+    <a class="list-group-item" ng-class="spot.class" role="spot-item" ng-click="selectSpot(spot)">
+      <h4 class="list-group-item-heading" role="spot-title">{{spot.title}}</h4>
+      <p class="list-group-item-text">{{spot.description}}</p>
+      <p class="hide" role="spot-longitude">{{spot.longitude}}</p>
+      <p class="hide" role="spot-latitude">{{spot.latitude}}</p>
+      <p class="hide" role="spot-id">{{spot._id}}</p>
+    </a>
+  </div>
+  <div display-markers>
+</div>

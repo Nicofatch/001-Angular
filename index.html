@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Spotly</title>
+    <link rel="stylesheet" href="css/libs/bootstrap.custo.css">
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.css" />
+    <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/libs/leaflet.awesome-markers.css" />
+    <link rel="stylesheet" href="css/libs/select2.css">
+    <link href='http://fonts.googleapis.com/css?family=Grand+Hotel' rel='stylesheet' type='text/css'>
+  </head>
+  <body ng-app="app">
+
+    <style>
+      @media (min-width:768px) {
+      #map { height: 300px; }
+      }
+      @media (max-width:768px) {
+      #map { height: 180px; }
+      }
+      
+    </style>    
+    <div class="container">
+      
+      <!-- Nav bar -->
+      <nav class="navbar" role="navigation">
+
+	<div class="navbar-header">
+	  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+	    <span class="sr-only">Toggle navigation</span>
+	    <span class="icon-bar"></span>
+	    <span class="icon-bar"></span>
+	    <span class="icon-bar"></span>
+	  </button>
+	  <a class="navbar-brand" href="#" style="font-family: 'Grand Hotel', cursive;font-size:2em;">Spotly</a>
+	</div>
+	<div class="collapse navbar-collapse navbar-ex1-collapse">
+	  <ul class="nav navbar-nav">
+	    <li><a href="#/map/spot/new"><i class="icon-map-marker"></i> New Spot</li></a>
+	  </ul>
+	  <form class="navbar-form navbar-left col-lg-6 col-md-8 col-sm-8" role="search">
+	    <div class="input-group">
+	      <input type="text" class="form-control" placeholder="Search">
+	      <span class="input-group-btn">
+		<!--<button type="submit" class="btn btn-primary"> <i class="icon-search icon-white"></i></button>-->
+		<a href="#/map/" class="btn btn-primary"><i class="icon-search icon-white"></i></a>
+	      </span>
+	    </div>
+	  </form>
+
+	</div>
+      </nav>
+      
+      <!-- Main container -->
+      <div id="map"></div>
+      <div data-ng-view=""></div>
+
+      <!-- Footer -->
+      <footer id="footer">
+	<small>
+	  <hr>
+	  <div class="row">
+	    <div class="col-lg-2 col-md-2 col-sm-4 col-xs-12">
+	      <ul class="list-unstyled">
+		<li>GitHub<li>
+		<li><a href="#">About us</a></li>
+		<li><a href="#">Blog</a></li>
+		<li><a href="#">Contact & support</a></li>
+		<li><a href="#">Enterprise</a></li>
+		<li><a href="#">Site status</a></li>
+	      </ul>
+	    </div>
+	    <div class="col-lg-2 col-md-2 col-sm-4 col-xs-12">
+	      <ul class="list-unstyled">
+		<li>Applications<li>
+		<li><a href="#">Product for Mac</a></li>
+		<li><a href="#">Product for Windows</a></li>
+		<li><a href="#">Product for Eclipse</a></li>
+		<li><a href="#">Product mobile apps</a></li>
+	      </ul>
+	    </div>
+	    <div class="col-lg-2 col-md-2 col-sm-4 col-xs-12">
+	      <ul class="list-unstyled">
+		<li>More<li>
+		<li><a href="#">Training</a></li>
+		<li><a href="#">Students & teachers</a></li>
+		<li><a href="#">The Shop</a></li>
+		<li><a href="#">Plans & pricing</a></li>
+		<li><a href="#">Contact us</a></li>
+	      </ul>
+	    </div>
+	    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 pull-right">
+	      <p class="muted pull-right">&copy; 2013 Company Name. All rights reserved</p>
+	    </div>
+	  </div>
+	</small>
+      </footer>
+    </div>
+    
+    <!-- Vendor libs -->
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
+    <!-- UI libs -->
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+    <script src="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.js"></script>
+    <script src="js/libs/leaflet.awesome-markers.js"></script>
+    <script src="js/libs/select2.min.js"></script>
+
+    <!-- App libs -->
+    <script src="js/map.js"></script>
+    <script src="app/app.js"></script>
+    <script src="app/controllers/mapController.js"></script>
+    <script src="app/services/mapService.js"></script>
+    <script src="app/directives/displayMarkers.js"></script>
+    <script src="app/directives/selectMarker.js"></script>
+
+  </body>
+</html>
