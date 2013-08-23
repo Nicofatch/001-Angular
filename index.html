@@ -34,18 +34,18 @@
 	    <span class="icon-bar"></span>
 	    <span class="icon-bar"></span>
 	  </button>
-	  <a class="navbar-brand" href="#" style="font-family: 'Grand Hotel', cursive;font-size:2em;">Spotly</a>
+	  <a class="navbar-brand" href="#/" style="font-family: 'Grand Hotel', cursive;font-size:2em;">Spotly</a>
 	</div>
 	<div class="collapse navbar-collapse navbar-ex1-collapse">
-	  <ul class="nav navbar-nav">
+	  <!--<ul class="nav navbar-nav">
 	    <li><a href="#/map/spot/new"><i class="icon-map-marker"></i> New Spot</li></a>
-	  </ul>
+	  </ul>-->
 	  <form class="navbar-form navbar-left col-lg-6 col-md-8 col-sm-8" role="search">
 	    <div class="input-group">
 	      <input type="text" class="form-control" placeholder="Search">
 	      <span class="input-group-btn">
 		<!--<button type="submit" class="btn btn-primary"> <i class="icon-search icon-white"></i></button>-->
-		<a href="#/map/" class="btn btn-primary"><i class="icon-search icon-white"></i></a>
+		<a href="#/map" class="btn btn-primary"><i class="icon-search icon-white"></i></a>
 	      </span>
 	    </div>
 	  </form>
@@ -55,7 +55,7 @@
       
       <!-- Main container -->
       <div id="map"></div>
-      <div data-ng-view=""></div>
+      <div data-ui-view=""></div>
 
       <!-- Footer -->
       <footer id="footer">
@@ -100,18 +100,21 @@
     </div>
     
     <!-- Vendor libs -->
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
+    <script src="js/libs/angular-ui-router.js"></script>
+    <script src="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.js"></script>
 
     <!-- UI libs -->
-    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
-    <script src="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.js"></script>
     <script src="js/libs/leaflet.awesome-markers.js"></script>
     <script src="js/libs/select2.min.js"></script>
+    <script src="js/libs/ui-utils.min.js"></script>
 
     <!-- App libs -->
     <script src="js/map.js"></script>
     <script src="app/app.js"></script>
+    <script src="app/states.js"></script>
     <script src="app/controllers/mapController.js"></script>
     <script src="app/services/mapService.js"></script>
     <script src="app/directives/displayMarkers.js"></script>

@@ -3,15 +3,16 @@ app.service('mapService', function () {
 	return spots;
     };
 
-    this.insertSpot = function (title, description) {
+    this.insertSpot = function (options) {
         var topID = spots.length + 1;
         spots.push({
-            id: topID,
-            title: title ,
-            description: description ,
-	    longitude:0,
-	    latitude:0
+            _id: topID,
+            title: options.title ,
+            description: options.description ,
+	    longitude: options.longitude,
+	    latitude: options.latitude
         });
+	return spots[topID];
     };
 
 /*    this.deleteCustomer = function (id) {
@@ -56,14 +57,6 @@ app.service('mapService', function () {
       "longitude": 2.302201,
       "latitude": 48.9649466,
       "_id": "3"
-    },
-    {
-      "title": "Maison  de Suresnes",
-      "description": "On y est bien :)",
-      "sports": null,
-      "longitude": "2.209920287132263",
-      "latitude": "48.865247626558684",
-      "_id": "4"
     }
   ];
 

@@ -1,12 +1,35 @@
+<style>
+
+  .list-group-item:hover .btn {
+  
+  background-color:white !important;
+  
+  }
+
+</style>
 <div class="list-group" style="margin-top:20px;">
-  <div data-ng-repeat="spot in spots">
+  <div data-ui-view="" ng-animate="{enter:'fade-enter'}">
+    <a href="#/map/spot/new" class="list-group-item" style="text-align:center">
+      <span><i class="icon-map-marker"></i> <b>Add a new Spot</b></span>
+    </a>
+  </div>
+  <div data-ng-repeat="spot in spots | orderBy:'_id':reverse">
     <a class="list-group-item" ng-class="spot.class" role="spot-item" ng-click="selectSpot(spot)">
+      <div class="pull-right">
+	<span class="label label-info">x cinema</span>
+	<span class="label label-default">x chaise</span>
+	<button class="btn btn-sm"><i class="icon-map-marker"></i></button>
+	<button class="btn btn-sm"><i class="icon-comment"></i></button>
+	<button class="btn btn-sm"><i class="icon-thumbs-up"></i></button>
+	<button class="btn btn-sm"><i class="icon-share"></i></button>
+      </div>
       <h4 class="list-group-item-heading" role="spot-title">{{spot.title}}</h4>
+
       <p class="list-group-item-text">{{spot.description}}</p>
       <p class="hide" role="spot-longitude">{{spot.longitude}}</p>
       <p class="hide" role="spot-latitude">{{spot.latitude}}</p>
       <p class="hide" role="spot-id">{{spot._id}}</p>
+      <div display-marker/>
     </a>
   </div>
-  <div display-markers>
 </div>
