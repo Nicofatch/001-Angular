@@ -53,6 +53,4 @@ app.controller('MapController', function ($scope, $state, mapService) {
 	//$scope.selectedSpot.class = '';
 	$scope.selectedSpot = '';
     }
-
-
 });

@@ -1,3 +1,13 @@
+<style>
+
+#map-spot-new-form {
+
+padding-bottom:0px;
+
+}
+
+</style>
+
 <script>
 app.value('uiJqConfig', {
 // The Tooltip namespace
@@ -6,20 +16,20 @@ placeholder:"Activity"
 }
 });
 </script>
-<form class="form-inline well" role="form" style="margin-bottom:20px;">
+<form class="form well" role="form" style="margin-bottom:20px;" id="map-spot-new-form">
   <div class="row">
     
-    <div class="form-group col-lg-3">
+    <div class="form-group col-lg-12">
       <label for="newSpotLocation" class="sr-only">Location</label>
       <input type="text" id="newSpotLocation" placeholder="My Location" class="form-control" disabled>
     </div>
     
-    <div class="form-group col-lg-3">
+    <div class="form-group col-lg-12">
       <label for="newSpotTitle" class="sr-only">Title</label>
       <input type="text" id="newSpotTitle" placeholder="Name" data-ng-model="newSpot.title" class="form-control">
     </div>
   
-    <div class="form-group col-lg-3">
+    <div class="form-group col-lg-12">
       <label for="inputActivity" class="sr-only">Activity</label>
       <select id="inputActivity" multiple="multiple" class="populate placeholder">
       <optgroup label="Alaskan/Hawaiian Time Zone">
@@ -84,7 +94,7 @@ placeholder:"Activity"
     <input id="newSpotDescription" rows="3" data-ng-model="newSpot.description" placeholder="Description" class="form-control"></textarea>
 </div>-->
   
-    <div class="form-group col-lg-3">
+    <div class="form-group col-lg-12">
       <button data-ng-click="insertSpot()" data-ng-disabled="!newSpot.title" class="btn btn-primary">Add Spot</button>
     </div>
 </form>
