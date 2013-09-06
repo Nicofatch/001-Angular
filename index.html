@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Spotly</title>
   <link rel="stylesheet" href="css/libs/bootstrap.custo.css">
+  <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.css" />
   <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
   <link rel="stylesheet" href="css/libs/leaflet.awesome-markers.css" />
@@ -12,130 +13,39 @@
   <link href='http://fonts.googleapis.com/css?family=Grand+Hotel' rel='stylesheet' type='text/css'>
 </head>
 
-
-<style>
-  @media (min-width:768px) {
-    #map { height: 400px; }
-  }
-  @media (max-width:768px) {
-    #map { height: 180px; }
-    .navbar-nav {
-      float:left !important;
-    } 
-  }
-
-  @media (max-width:1200px) {
-    #navbar-full {
-      display:none;
-    }
-  }
-  @media (min-width:1201px) {
-    #navbar-short {
-      display:none;
-    }
-  }
-
-
-  @media (max-width:768px) {
-    #map { height: 180px; }
-  }
-
-  @media (min-width:768px) {  
-    #nav-search-location {
-      padding-left:0px;
-    }
-  }
-  @media (max-width:768px) {  
-    #nav-search-button {
-      position: relative;
-      min-height:   1px;
-      margin-right: 15px;
-      margin-left: 15px;
-      width:150px;
-    }
-  }
-  @media (max-width: 768px) {
-    .navbar-nav > li {
-      float: left;
-    }
-  }
-
-  #badge-notification {
-    background-color:#d9534f
-  }
-
-  #nav-avatar {
-    height:32px;
-  }
-
-  #nav-maps {
-    padding-top:10px;
-    padding-bottom:0;
-  }
-
-  #navbar-short {
-   margin-left:10px;
- }
-
- #map-title {
-  margin-top:0px;
-}  
-
-#map-right {
-  padding-left:0;
-  padding-right:0;
-}
-
-#map-left {
-  padding-left:0;
-}
-
-@media (max-width: 1200px) {
-
-#map-left {
-    padding-right:0;
-}
-}
-
-#map-tabs {
-
-  padding:10px 10px 0 10px;
-  background-color: #f5f5f5;
-  border-bottom: 1px solid #dddddd;
-  border-top-right-radius: 3px;
-  border-top-left-radius: 3px;
-}
-
-</style>
-
 <body ng-app="app">
 
   <div class="container">
 
     <!-- Nav bar -->
-    <nav class="navbar" role="navigation">
+    <nav class="navbar navbar-default" role="navigation">
 
       <div class="navbar-header">
+        
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
           <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
+          <i style="color:#777777" class="icon-search icon-large"></i>
         </button>
         <a class="navbar-brand" href="#/" style="font-family: 'Grand Hotel', cursive;font-size:2em;">Spotly</a>
+        <ul class="nav navbar-nav visible-xs pull-right" id="navbar-short">
+             <li><a href="#/map"><i class="icon-map-marker icon-large"></i></a></li>
+             <li><a href="#/maps"><i class="icon-globe   icon-large"></i></a></li>
+             <li><a href=""><span class="badge" id="badge-notification">8</span></a></li>
+             <li><a href="maps.html" id="nav-maps" style="padding-top:0"><img src="img/Avatar-128.png" id="nav-avatar"></a></li>
+        </ul>
       </div>
       <div class="collapse navbar-collapse navbar-ex1-collapse">
 
         <form class="navbar-form navbar-left col-lg-7 col-md-8 col-sm-7" role="search">
           <div id="nav-search-spot" class="form-group col-lg-5 col-sm-5">
             <div class="input-group">
-              <span class="input-group-addon"><i class="icon-map-marker"></i></span>
+              <span class="input-group-addon"><i class="icon-map-marker icon-large"></i></span>
               <input type="text" class="form-control" placeholder="Search">
             </div>
           </div>
           <div id="nav-search-location" class="form-group col-lg-5 col-sm-5">
             <div class="input-group">
-              <span class="input-group-addon"><i class="icon-location-arrow"></i></span>
+              <span class="input-group-addon"><i class="icon-location-arrow icon-large"></i></span>
               <input type="text" class="form-control" placeholder="Around">
             </div>
           </div>
@@ -148,14 +58,14 @@
               </span>
             </form>-->                          
             <ul class="pull-right nav navbar-nav" id="navbar-full">
-             <li><a href="#/map/spot/new"><i class="icon-map-marker icon-large"></i> New Spot</a></li>
-             <li><a href="maps.html"><i class="icon-compass icon-large"></i> Maps</a></li>
+             <li><a href="#/map"><i class="icon-map-marker icon-large"></i> New Spot</a></li>
+             <li><a href="#/maps"><i class="icon-globe icon-large"></i> Maps</a></li>
              <li><a href=""><span class="badge" id="badge-notification">8</span></a></li>
              <li><a href="maps.html" id="nav-maps"><img src="img/Avatar-128.png" id="nav-avatar"> Chaton</a></li>
            </ul>   
-           <ul class="pull-right nav navbar-nav" id="navbar-short">
-             <li><a href="#/map/spot/new"><i class="icon-map-marker icon-large"></i></a></li>
-             <li><a href="maps.html"><i class="icon-compass icon-large"></i></a></li>
+           <ul class="pull-right nav navbar-nav visible-sm" id="navbar-short">
+             <li><a href="#/map"><i class="icon-map-marker icon-large"></i></a></li>
+             <li><a href="#/maps"><i class="icon-globe   icon-large"></i></a></li>
              <li><a href=""><span class="badge" id="badge-notification">8</span></a></li>
              <li><a href="maps.html" id="nav-maps"><img src="img/Avatar-128.png" id="nav-avatar"></a></li>
            </ul>
@@ -163,6 +73,8 @@
 
          </div>
        </nav>
+
+
 
        <!--<div class="panel panel-default">
         <div class="panel-body row" id="map-cartouche">
@@ -239,55 +151,10 @@
           </div>
         </div>-->
 
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <!-- AddThis Button BEGIN -->
-            <div class="addthis_toolbox addthis_default_style ">
-              <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
-              <a class="addthis_button_tweet"></a>
-              <a class="addthis_button_pinterest_pinit"></a>
-              <a class="addthis_counter addthis_pill_style"></a>
+            <div data-ui-view="">
+              <!-- MAIN CONTAINER -->
             </div>
-            <script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
-            <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-520613fc20d317d5"></script>
-            <!-- AddThis Button END -->
-          </div>
-          <div class="panel-body">
-            <div class="col-lg-8">
-              <h1 id="map-title">Les meilleurs bars à putes de paris</h1>
-            </div>
-            <div class="col-lg-4 pull-left" style="margin-top:15px; margin-bottom:15px">
-              <div class="pull-right">
-                <span class="label label-info">x cinema</span> <span class="label label-default">x chaise</span>
-              </div>
-            </div>
-            
-           
-            <!-- Main container -->
-            <div  style="clear:both" data-ui-view="" id="map-left" class="col-lg-4"></div>
-            <div id="map-right" class="col-lg-8">
-              <div class="panel panel-default">
-               
-                <div class="panel-body">
-                  <div id="map"></div>
-                </div>
-              </div>
-              <div class="panel panel-default">
-               
-                <ul class="nav nav-tabs" id="map-tabs">
-  <li><a href="#home" data-toggle="tab">Home</a></li>
-  <li><a href="#discussions" data-toggle="tab">Discussions <span class="badge">124</span></a></li>
-  <li><a href="#messages" data-toggle="tab">Messages</a></li>
-  <li><a href="#settings" data-toggle="tab">Settings</a></li>
-</ul>
-               
-                <div class="panel-body">
-                  <p>Bla bla</p>
-                </div>
-              </div>
-            </div>
-          </div> 
-        </div>
+
         <!-- Footer -->
         <footer id="footer">
           <small>
@@ -346,29 +213,11 @@
             <script src="js/map.js"></script>
             <script src="app/app.js"></script>
             <script src="app/states.js"></script>
+            <script src="app/controllers/mapsController.js"></script>
             <script src="app/controllers/mapController.js"></script>
             <script src="app/services/mapService.js"></script>
+            <script src="app/services/mapsService.js"></script>
             <script src="app/directives/displayMarkers.js"></script>
-            <script src="app/directives/selectMarker.js"></script>
-
-            <script>
-             $("#inputActivity").select2({
-               placeholder: "Activity"
-             }).on("change", function(e) { $('#s2id_inputActivity').css('width','100%') });
-             $('#s2id_inputActivity').css('width','100%');
-
-             $('#map-tabs a').click(function (e) {
-              e.preventDefault()
-              $(this).tab('show')
-             })
-
-             $('#map-tabs a:first').tab('show')
-
-
-           </script>
-
-
-         </script>
        </body>
        </html>
 

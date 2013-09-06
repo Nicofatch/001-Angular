@@ -1,14 +1,3 @@
-var spotMap;
-
-$(document).ready(function(){
-    // Initialize the map
-    spotMap = Object.create(SpotMap, {
-        map_id: { value: 'map' }
-    });
-    spotMap._init();
-});
-
-
 var SpotMap = (function _SpotMap() {
     var self = Object.create({});
     
