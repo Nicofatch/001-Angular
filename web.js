@@ -12,6 +12,7 @@ app.use("/css", express.static(__dirname + '/css'));
 app.use("/fonts", express.static(__dirname + '/fonts'));
 app.use("/js", express.static(__dirname + '/js'));
 app.use("/app", express.static(__dirname + '/app'));
+app.use("/img", express.static(__dirname + '/img'));
 
 app.get('/', function(request, response) {
     var html = fs.readFileSync('./index.html').toString()
