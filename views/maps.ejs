@@ -1,24 +1,30 @@
 <% layout('layout') -%>
+
+<!-- STYLESHEETS -->
+<% stylesheet('/css/vendor/select2.css') -%>
+
 <!-- VENDOR JS -->
 <% script('//ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js') -%>
-<% script('js/vendor/angular-ui-router.js') -%>
-<% script('js/vendor/ui-utils.min.js') -%>
+<% script('/js/vendor/angular-ui-router.js') -%>
+<% script('/js/vendor/ui-utils.min.js') -%>
+<% script('/js/vendor/select2.min.js') -%>
 
 <!-- APP -->
-<% script('js/app.js') -%>
-<% script('js/controllers/mapsController.js') -%>
-<% script('js/services/mapsService.js') -%>
+<% script('/js/app.js') -%>
+<% script('/js/mapsStates.js') -%>
+<% script('/js/controllers/mapsController.js') -%>
+<% script('/js/controllers/newMapController.js') -%>
+<% script('/js/services/mapService.js') -%>
 
 <!-- DOM -->
-<% script('js/dom/maps.js') -%>
+<% script('/js/dom/maps.js') -%>
 
 <div class="panel panel-default">
-  <ul class="nav nav-tabs visible-sm visible-lg visible-md" id="maps-tabs">
-    <li class=""><a href="#last-contributions" data-toggle="tab"><i class="icon-pencil"></i> Last Contributions</a></li>
+  <ul class="nav nav-tabs visible-sm visible-lg visible-md header-tabs">
     <li class=""><a href="#my-maps" data-toggle="tab"><i class="icon-globe"></i> My Maps</a></li>
+    <li class=""><a href="#last-contributions" data-toggle="tab"><i class="icon-pencil"></i> Last Contributions</a></li>
     <li class=""><a href="#hot" data-toggle="tab"><i class="icon-star"></i> Hot</a></li>
-    <div class="pull-right">
-      <button class="btn btn-success"><i class="icon-plus-sign"></i> Create a Map</button>
+    <div class="pull-right" data-ui-view="newMapButton">
     </div>
   </ul>
 <div class="panel-body" data-ng-controller="MapsController">
@@ -62,25 +68,28 @@
       <button class="btn btn-success"><i class="icon-plus-sign"></i> Map</button>
     </div>
     <ul class="nav nav-pills">
-        <li class="active"><a href="#">Contributions</a></li>
-        <li class=""><a href="#">Maps</a></li>
+        <li class="active"><a href="#">Maps</a></li>
+        <li class=""><a href="#">Contributions</a></li>
         <li class=""><a href="#">Hot</a></li>
       </ul>
         
     </div>
     <hr style="">
 
+    <div data-ui-view="newMapForm">
+
+    </div>
+
     <div data-ng-repeat="map in maps">  
       <div class="row" style="height:100%">
           
         <div class="col-lg-9 col-md-8 col-sm-8 col-xs-12">
-          <span id="map-title-globe-container">
-              <i class="icon-globe visible-xs" id="map-title-globe-small"></i>
-              <i class="icon-globe icon-3x visible-lg visible-sm visible-md" id="map-title-globe"></i> 
+          <span class="map-icon-container">
+            <i class="icon-globe icon-3x visible-lg visible-sm visible-md map-icon"></i> 
           </span>
-          <div id="map-info-container">
+          <div class="map-info-container">
             <p class="lead">
-              <b><a href="#">{{map.title}}</a></b></p>
+              <b><a href="/map/#/{{map._id}}">{{map.title}}</a></b></p>
             <p>{{map.description}}</p>
             <p>
               <span data-ng-repeat="tag in map.tags"><span ng-class="tagClass($parent.$index, $index)">{{tag}}</span> </span>

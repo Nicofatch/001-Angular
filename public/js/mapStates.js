@@ -7,14 +7,16 @@ angular.module('app')
           .otherwise('/');
         $stateProvider
       	  .state('map', {
-      	      url:'/',
-              templateUrl:'js/partials/SpotNewFormButton.html'
+      	      url:'/{mapId:[0-9]{1,4}}',
+              templateUrl:'/js/partials/Map.html',
+              /*templateUrl:'/js/partials/SpotNewFormButton.html',*/
+              controller: 'MapController'
       	  })
-      	  .state('new', {
+      	  .state('map.new', {
       	      url: '/new',
-      	      templateUrl:'js/partials/SpotNewForm.html',
+      	      templateUrl:'/js/partials/SpotNewForm.html',
               controller: 'NewSpotController'
-      	  })
+      	  });
       }
     ]
   );

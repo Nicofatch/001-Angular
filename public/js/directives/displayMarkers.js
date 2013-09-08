@@ -10,7 +10,7 @@ app.directive('displayMarker', [ '$timeout', function($timeout) {
 	    $timeout(function() {
 		var spot = scope.spot;
 
-		console.log(spot._id);
+		// console.log(spot._id);
 		// Create a marker
 		var marker = Object.create(Marker, {
 		    id: { value: spot._id },

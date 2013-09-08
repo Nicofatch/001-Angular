@@ -39,7 +39,7 @@ var define_routes = function(dict) {
 var ROUTES = define_routes({
     '/': indexfn,
     '/maps': mapsfn,
-    '/map': mapfn,
+    '/map': mapfn
 });
 
 module.exports = ROUTES;

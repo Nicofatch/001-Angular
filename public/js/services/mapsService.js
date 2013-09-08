@@ -9,9 +9,9 @@ app.service('mapsService', function () {
             _id: topID,
             title: options.title ,
             description: options.description ,
-	          tags: options.tags,
-            contributors_count: options.contributors_count,
-            markers_count: options.markers_count
+	          tags: options.tags || '',
+            contributors_count: options.contributors_count || '1',
+            markers_count: options.markers_count || '0'
         });
 	     return maps[topID];
     };

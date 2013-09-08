@@ -7,10 +7,31 @@ angular.module('app')
           .otherwise('/');
 
         $stateProvider
-      	  .state('home', {
-      	      url:'/',
-      	      template:''
-      	  })
+          .state('maps', {
+              url:'/',
+              views: {
+                // So this one is targeting the unnamed view within the parent state's template.
+                'newMapButton': {
+                  templateUrl: '/js/partials/MapNewFormButton.html'
+                },
+                'newMapForm': {
+                  template:''
+                }
+              }
+          })
+          .state('new', {
+              url: '/new',
+              views: {
+                // So this one is targeting the unnamed view within the parent state's template.
+                'newMapButton': {
+                  template: ''
+                },
+                'newMapForm': {
+                  templateUrl:'/js/partials/MapNewForm.html',
+                  controller: 'NewMapController'
+                }
+              }
+          });
       }
     ]
   );

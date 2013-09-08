@@ -1,18 +1,4 @@
-var spotMap;
 
-$(document).ready(function(){
-    // Initialize the map
-    spotMap = Object.create(SpotMap, {
-    	map_id: { value: 'map' }
-    });
-    spotMap._init();
-
-    $('#map-tabs a').click(function (e) {
-    	e.preventDefault()
-    	$(this).tab('show')
-    })
-    $('#map-tabs a:first').tab('show')
-});
 
 var SpotMap = (function _SpotMap() {
     var self = Object.create({});

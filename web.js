@@ -4,13 +4,14 @@ var express = require('express')
   , path    = require('path')
   , async   = require('async')
   , engine = require('ejs-locals')
-  , ROUTES  = require('./routes');
+  , ROUTES  = require('./routes')
+  , Router = require('./router');
 
 var app = express();
+var router = new Router();
 
 // use ejs-locals for all ejs templates:
 app.engine('ejs', engine);
-
 
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
@@ -18,10 +19,10 @@ app.set('port', process.env.PORT || 8080);
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.favicon(path.join(__dirname, 'public/img/favicon.ico')));
 app.use(express.logger("dev"));
-
+app.use(router);
 
 for(var ii in ROUTES) {
-    app.get(ROUTES[ii].path, ROUTES[ii].fn);
+    router.get(ROUTES[ii].path, ROUTES[ii].fn);
 }
 
 //app.use(express.logger());
