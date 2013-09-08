@@ -1,0 +1,103 @@
+<% layout('layout') -%>
+<!-- Stylesheets -->
+<% stylesheet('http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.css') -%>
+<% stylesheet('css/vendor/leaflet.awesome-markers.css') -%>
+<% stylesheet('css/vendor/select2.css') -%>
+
+<!-- VENDOR JS -->
+<% script('//ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js') -%>
+<% script('js/vendor/angular-ui-router.js') -%>
+<% script('js/vendor/ui-utils.min.js') -%>
+<% script('http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.js') -%>
+<% script('js/vendor/leaflet.awesome-markers.js') -%>
+<% script('js/vendor/select2.min.js') -%>
+
+<!-- APP -->
+<% script('js/app.js') -%>
+<% script('js/mapStates.js') -%>
+<% script('js/controllers/mapController.js') -%>
+<% script('js/controllers/newSpotController.js') -%>
+<% script('js/services/mapService.js') -%>
+<% script('js/directives/displayMarkers.js') -%>
+
+<!-- DOM -->
+<% script('js/dom/map.js') -%>
+
+<div class="panel panel-default" data-ng-controller="MapController">
+  <!-- PANEL HEADING -->
+  <div class="panel-heading">
+    <!-- AddThis Button BEGIN -->
+    <div class="addthis_toolbox addthis_default_style ">
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+      <a class="addthis_button_tweet"></a>
+      <a class="addthis_button_pinterest_pinit"></a>
+      <a class="addthis_counter addthis_pill_style"></a>
+    </div>
+    <script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
+    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-520613fc20d317d5"></script>
+    <!-- AddThis Button END -->
+  </div>
+
+  <!-- PANEL BODY -->
+  <div class="panel-body">
+    <!-- MAP TITLE -->
+    <div class="col-lg-8">
+      <h1 id="map-title">Les meilleurs bars à chat de paris</h1>
+    </div>
+    <div class="col-lg-4 pull-left" style="margin-top:15px; margin-bottom:15px">
+      <div class="pull-right">
+        <span class="label label-info">x cinema</span> <span class="label label-default">x chaise</span>
+      </div>
+    </div>
+
+    <!-- LEFT ZONE -->
+    <div  style="clear:both" id="map-left" class="col-lg-4">      
+      <!-- NEW SPOT BUTTON -->
+      <div class="list-group">
+        <div data-ui-view="">
+        </div>
+      </div>
+      <!-- SPOTS LIST -->
+      <div class="list-group">
+        <div data-ng-repeat="spot in spots | orderBy:_id">
+          <a class="list-group-item container" ng-class="spot.class" role="spot-item" ng-click="selectSpot(spot)">
+            <div class="spot-infos col-lg-8 col-sm-8 col-md-8 col-xs-10">
+              <h4 class="list-group-item-heading" role="spot-title">{{spot.title}}</h4>
+              <p class="list-group-item-text">{{spot.description}}</p>
+              <p class="hide" role="spot-longitude">{{spot.longitude}}</p>
+              <p class="hide" role="spot-latitude">{{spot.latitude}}</p>
+              <p class="hide" role="spot-id">{{spot._id}}</p>
+              <div display-marker></div>
+            </div> 
+            <div class="spot-actions col-lg-4 col-sm-4 col-md-4 col-xs-12">
+              <button class="btn pull-right"><i class="icon-plus"></i></button>
+            </div>
+          </a>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- RIGHT ZONE -->
+    <div id="map-right" class="col-lg-8">
+      <!-- MAP -->
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div id="map"></div>
+        </div>
+      </div>
+      <!-- TABS -->
+      <div class="panel panel-default">
+        <ul class="nav nav-tabs" id="map-tabs">
+          <li><a href="#home" data-toggle="tab">Home</a></li>
+          <li><a href="#discussions" data-toggle="tab">Discussions <span class="badge">124</span></a></li>
+          <li><a href="#messages" data-toggle="tab">Messages</a></li>
+          <li><a href="#settings" data-toggle="tab">Settings</a></li>
+        </ul>
+        <div class="panel-body">
+          <p>Bla bla</p>
+        </div>
+      </div>
+    </div>
+  </div> 
+</div>
