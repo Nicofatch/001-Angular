@@ -1,75 +1,93 @@
- <!-- MAP TITLE -->
- <div class="col-lg-8">
- 	<h1 id="map-title">{{map.title}}</h1>
- </div>
- <div class="col-lg-4 pull-left" style="margin-top:15px; margin-bottom:15px">
- 	<div class="pull-right">
- 		<span class="label label-info">x cinema</span> <span class="label label-default">x chaise</span>
- 	</div>
- </div>
+  <!-- PANEL HEADING -->
+  <div class="panel-heading">
+  	<!-- AddThis Button BEGIN -->
+  	<div class="addthis_toolbox addthis_default_style ">
+  		<a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+  		<a class="addthis_button_tweet"></a>
+  		<a class="addthis_button_pinterest_pinit"></a>
+  		<a class="addthis_counter addthis_pill_style"></a>
+  	</div>
+  	<script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
+  	<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-520613fc20d317d5"></script>
+  	<!-- AddThis Button END -->
+  </div>
 
- <!-- LEFT ZONE -->
- <div  style="clear:both" id="map-left" class="col-lg-4">      
- 	<!-- NEW SPOT BUTTON -->
- 	<div class="list-group">
- 		<div data-ui-view="">
- 			<a ui-sref="map.new({mapId:$stateParams.mapId})" class="btn btn-success col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align:center;">
-				<span><i class="icon-map-marker"></i> <b>Add a new Spot</b></span>
-			</a>	
- 		</div>
- 	</div>
- 	<!-- SPOTS LIST -->
- 	<div class="list-group">
- 		<div data-ng-repeat="spot in map.spots | orderBy:_id">
- 			<a class="list-group-item container" ng-class="spot.class" role="spot-item" ng-click="selectSpot(spot)">
- 				<div class="spot-infos col-lg-8 col-sm-8 col-md-8 col-xs-10">
- 					<span class="spot-icon-container visible-lg visible-sm visible-md">
- 						<i class="icon-map-marker icon-2x spot-icon"></i>
- 					</span>
- 					<div class="spot-info-container">
- 						<h4 class="list-group-item-heading" role="spot-title">{{spot.title}}</h4>
- 						<p class="list-group-item-text">{{spot.description}}</p>
- 						<p class="hide" role="spot-longitude">{{spot.longitude}}</p>
- 						<p class="hide" role="spot-latitude">{{spot.latitude}}</p>
- 						<p class="hide" role="spot-id">{{spot._id}}</p>
- 					</div>
- 					<div display-marker></div>
- 				</div> 
- 				<div class="spot-actions col-lg-4 col-sm-4 col-md-4 col-xs-12">
- 					<button class="btn pull-right"><i class="icon-plus"></i></button>
- 				</div>
- 			</a>
- 		</div>
+  <!-- PANEL BODY -->
+  <div class="panel-body">
+  	<!-- MAP TITLE -->
+  	<div class="col-lg-8">
+  		<h1 id="map-title">{{map.title}}</h1>
+  	</div>
+  	<div class="col-lg-4 pull-left" style="margin-top:15px; margin-bottom:15px">
+  		<div class="pull-right">
+  			<span class="label label-info">x cinema</span> <span class="label label-default">x chaise</span>
+  		</div>
+  	</div>
 
- 	</div>
- </div>
+  	<!-- LEFT ZONE -->
+  	<div  style="clear:both" id="map-left" class="col-lg-4">      
+  		<!-- NEW SPOT BUTTON -->
+  		<div class="list-group">
+  			<div data-ui-view="">
+  				<a ui-sref="map.new({mapId:$stateParams.mapId})" class="btn btn-success col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align:center;">
+  					<span><i class="icon-map-marker"></i> <b>Add a new Spot</b></span>
+  				</a>	
+  			</div>
+  		</div>
+  		<!-- SPOTS LIST -->
+  		<div class="list-group">
+  			<div data-ng-repeat="spot in map.spots | orderBy:_id">
+  				<a class="list-group-item container" ng-class="spot.class" role="spot-item" ng-click="selectSpot(spot)">
+  					<div class="spot-infos col-lg-8 col-sm-8 col-md-8 col-xs-10">
+  						<span class="spot-icon-container visible-lg visible-sm visible-md">
+  							<i class="icon-map-marker icon-2x spot-icon"></i>
+  						</span>
+  						<div class="spot-info-container">
+  							<h4 class="list-group-item-heading" role="spot-title">{{spot.title}}</h4>
+  							<p class="list-group-item-text">{{spot.description}}</p>
+  							<p class="hide" role="spot-longitude">{{spot.longitude}}</p>
+  							<p class="hide" role="spot-latitude">{{spot.latitude}}</p>
+  							<p class="hide" role="spot-id">{{spot._id}}</p>
+  						</div>
+  						<div display-marker></div>
+  					</div> 
+  					<div class="spot-actions col-lg-4 col-sm-4 col-md-4 col-xs-12">
+  						<button class="btn pull-right"><i class="icon-plus"></i></button>
+  					</div>
+  				</a>
+  			</div>
 
- <!-- RIGHT ZONE -->
- <div id="map-right" class="col-lg-8">
- 	<!-- MAP -->
- 	<div class="panel panel-default">
- 		<div class="panel-body">
- 			<div id="map"></div>
- 		</div>
- 	</div>
- 	<!-- TABS -->
- 	<div class="panel panel-default">
- 		<ul class="nav nav-tabs header-tabs">
- 			<li><a href="#home" data-toggle="tab">Home</a></li>
- 			<li><a href="#discussions" data-toggle="tab">Discussions <span class="badge">124</span></a></li>
- 			<li><a href="#messages" data-toggle="tab">Messages</a></li>
- 			<li><a href="#settings" data-toggle="tab">Settings</a></li>
- 		</ul>
- 		<div class="panel-body">
- 			<p>Bla bla</p>
- 		</div>
- 	</div>
- </div>
+  		</div>
+  	</div>
 
- <!-- JS DOM -->
- <script>
-	var spotMap;
-	$(document).ready(function(){
+  	<!-- RIGHT ZONE -->
+  	<div id="map-right" class="col-lg-8">
+  		<!-- MAP -->
+  		<div class="panel panel-default">
+  			<div class="panel-body">
+  				<div id="map"></div>
+  			</div>
+  		</div>
+  		<!-- TABS -->
+  		<div class="panel panel-default">
+  			<ul class="nav nav-tabs header-tabs">
+  				<li><a href="#home" data-toggle="tab">Home</a></li>
+  				<li><a href="#discussions" data-toggle="tab">Discussions <span class="badge">124</span></a></li>
+  				<li><a href="#messages" data-toggle="tab">Messages</a></li>
+  				<li><a href="#settings" data-toggle="tab">Settings</a></li>
+  			</ul>
+  			<div class="panel-body">
+  				<p>Bla bla</p>
+  			</div>
+  		</div>
+  	</div>
+  	
+  </div> 
+
+  <!-- JS DOM -->
+  <script>
+  var spotMap;
+  $(document).ready(function(){
 	    // Initialize the map
 	    spotMap = Object.create(SpotMap, {
 	    	map_id: { value: 'map' }
@@ -82,4 +100,4 @@
 	    })
 	    $('.header-tabs a:first').tab('show')
 	});
- </script>
+  </script>
