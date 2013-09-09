@@ -86,7 +86,7 @@ app.service('mapService', function () {
     "contributors_count": "4",
     "markers_count": "15",
     "_id": "2",
-    "spots": spots
+    "spots": []
   },
   {
     "title": "Les plus beau chats",
