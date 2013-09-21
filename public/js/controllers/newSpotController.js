@@ -37,8 +37,33 @@ app.controller('NewSpotController', function ($rootScope, $scope, $state, mapSer
             $('#newSpotLocationAddressContainer').hide();
             $('#newSpotTitle').focus();
         } else {
-            $('#newSpotLocationAddressContainer').show();
+            $('#newSpotLocationAddressContainer').show();            
             $('#newSpotLocationAddress').focus();
+            $('#newSpotLocationAddress').autocomplete({
+                paramName: 'input',
+                serviceUrl: 'https://maps.googleapis.com/maps/api/place/autocomplete/json?types=geocode&language=fr&sensor=false&key=AIzaSyDhECsfYPYNNM7n-x-GuDTE3lwJlL5C_pw',
+                onSelect: function (suggestion) {
+                    $.ajax({
+                        url: "https://maps.googleapis.com/maps/api/place/details/json?reference="+suggestion.data+"&sensor=true&key=AIzaSyDhECsfYPYNNM7n-x-GuDTE3lwJlL5C_pw",
+                    }).done(function( data ) {
+                        spotMap.moveGeoMarker({lat:data.result.geometry.location.lat, lng:data.result.geometry.location.lng});
+                    });
+                },
+                transformResult: function(response) {
+                  return {
+                    suggestions: $.map($.parseJSON(response).predictions, function(dataItem) {
+                      /*var a = '';
+                      if (dataItem.address.hasOwnProperty('road'))
+                        a += dataItem.address.road + ', ';
+                      if (dataItem.address.hasOwnProperty('city'))
+                        a += dataItem.address.city + ', ';
+                      if (dataItem.address.hasOwnProperty('country'))
+                        a += dataItem.address.country;*/
+                      return { value: dataItem.description , data: dataItem.reference };
+                    })
+                  };
+                }
+            });
         }
     }
 });

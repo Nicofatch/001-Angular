@@ -9,13 +9,10 @@ angular.module('app')
         $stateProvider
           .state('maps', {
               url:'/',
-              views: {
-                'newMapForm': {
-                  template:''
-                }
-              }
+              templateUrl:'/js/partials/Maps.html',
+              controller: 'MapsController'
           })
-          .state('new', {
+          .state('maps.new', {  
               url: '/new',
               views: {
                 // So this one is targeting the unnamed view within the parent state's template.
@@ -27,7 +24,40 @@ angular.module('app')
                   controller: 'NewMapController'
                 }
               }
+          })
+          .state('map', {
+              url:'/:mapId',
+              templateUrl:'/js/partials/FullMap.html',
+              controller: 'MapController'
+          })
+          .state('map.info', {
+              url: '/info',
+              views: {
+                'main': {
+                  templateUrl: '/js/partials/MapInfo.html'
+                }
+              }              
+          })
+          .state('map.new', {
+              url: '/new',
+              views: {
+                'newSpot': {
+                  templateUrl: '/js/partials/SpotNewForm.html',
+                  controller: 'NewSpotController'
+                }
+              }              
+          })
+          .state('map.tags', {
+              url: '/tags',
+              views: {
+                // So this one is targeting the unnamed view within the parent state's template.
+                'newTags': {
+                  templateUrl: '/js/partials/TagsNewForm.html',
+                  controller: 'NewTagsController'
+                }
+              }
           });
+
       }
     ]
   );

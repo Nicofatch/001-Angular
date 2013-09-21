@@ -13,21 +13,21 @@ app.directive('displayMarker', [ '$timeout', function($timeout) {
 
 			// console.log(spot._id);
 			// Create a marker
-			var marker = Object.create(Marker, {
-				id: { value: spot._id },
-				latitude: { value: spot.latitude },
-				longitude: { value: spot.longitude },
-				title: { value: spot.title }
+			var marker = new Marker({
+				id: spot._id,
+				latitude: spot.latitude,
+				longitude: spot.longitude,
+				title: spot.title,
+				draggable: false
 			});
 
-			marker._init();
-			
 			// Add the marker to the map
 			spotMap.addMarker(marker);
 
-			//if (scope.$last)
+			if (scope.$last) {
 		    	// Update the map view
-		    spotMap.fitOnBounds();
+		    	spotMap.fitOnBounds();
+			}
 		}, 0);
 	}
 };

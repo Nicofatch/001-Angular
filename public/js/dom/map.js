@@ -1,33 +1,37 @@
-var SpotMap = (function _SpotMap() {
-    var self = Object.create({});
+var spotMap;
 
-    self._init = function _init() {
+$(document).ready(function(){
+  // Initialize the map
+  spotMap = new SpotMap('map');
+});
 
-        // Create the map
-        this.map = L.map(this.map_id);
-        this.markers = new HashTable();
-    	this.bounds = [];
-    	this.geoPosition = {};
+function SpotMap(map_id) {
 
-        // Set the legend
-        var osmUrl = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-            osmAttrib = '&copy; <a href="http://openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-            osm = L.tileLayer(osmUrl, {
-                maxZoom: 18,
-                attribution: osmAttrib,
-                timeout: 3000000
-            });
-        osm.addTo(this.map);
+    this.map_id = map_id;
+    // Create the map
+    this.map = L.map(this.map_id);
+    this.markers = new HashTable();
+	this.bounds = [];
+	this.geoPosition = {};
 
-        // Set the event receivers
-        this.map.on('locationfound', this.onLocationFound);
-        this.map.on('locationerror', this.onLocationError);
-        this.map.setView([48.51, 2.21], 1);
-        // Get geolocation and center the map
-        //self.geoLocate();
-    };
+    // Set the legend
+    var osmUrl = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+        osmAttrib = '&copy; <a href="http://openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+        osm = L.tileLayer(osmUrl, {
+            maxZoom: 18,
+            attribution: osmAttrib,
+            timeout: 3000000
+        });
+    osm.addTo(this.map);
 
-    self.geoLocate = function () {
+    // Set the event receivers
+    this.map.on('locationfound', onLocationFound);
+    this.map.on('locationerror', onLocationError);
+    this.map.setView([48.51, 2.21], 3);
+    // Get geolocation and center the map
+    //this.geoLocate();
+
+    this.geoLocate = function () {
         //TODO: cache the location
         this.map.locate({
             setView: true,
@@ -35,81 +39,41 @@ var SpotMap = (function _SpotMap() {
         });
     };
 
-    self.centerOnGeoPosition = function () {
+    this.centerOnGeoPosition = function () {
+        /*this.map.fitBounds([this.geoPosition.marker.LMarker._latlng], {
+            paddingTopLeft: [($(window).width()/4), 90],
+            paddingBottomRight: [50,50],
+            zoom:true
+        });*/
+        
         this.map.panTo([this.geoPosition.marker.LMarker._latlng.lat, this.geoPosition.marker.LMarker._latlng.lng]);
     };
 
-    self.moveGeoMarker = function (latlng) {
+    this.moveGeoMarker = function (latlng) {
+        console.log(latlng);
         this.geoPosition.marker.LMarker._latlng.lat = latlng.lat;
         this.geoPosition.marker.LMarker._latlng.lng = latlng.lng;
+        this.geoPosition.marker.LMarker.update();
         this.centerOnGeoPosition();
     }
 
-    self.removeGeoMarker = function () {
+    this.removeGeoMarker = function () {
         // Remove the marker
-        this.geoPosition.marker.clear(this.map);
+        this.map.removeLayer(this.geoPosition.marker.LMarker);
         // Clean the object
         this.geoPosition = {};
     };
 
-    self.fitOnBounds = function () {
+    this.fitOnBounds = function () {
         // Center the map on the displayed markers
         if (this.bounds.length)
             this.map.fitBounds(this.bounds, {
-                paddingTopLeft: [($(window).width()/4) + 90, 90],
-                paddingBottomRight: [50,50]
+                paddingTopLeft: [($(window).width()/4), 150],
+                paddingBottomRight: [150,150]
             });
     };
 
-    self.onLocationFound = function (e) {
-        var radius = e.accuracy / 2;
-        var message = "You are within " + radius + " meters from this point";
-
-        // Update geoposition coords
-        //self.geoPosition.coords.latitude = e.latlng.lat;
-        //self.geoPosition.coords.longitude = e.latlng.lng;
-
-        // Create a new marker
-        var marker = Object.create(Marker, {
-            id: {
-                value: 'geoPosition'
-            },
-            latitude: {
-                value: e.latlng.lat
-            },
-            longitude: {
-                value: e.latlng.lng
-            },
-            title: {
-                value: message
-            },
-            draggable: {
-                value: true
-            },
-            icon: {
-                value: 'icon-screenshot icon-large'
-            },
-            color: {
-                value: 'red'
-            }
-        });
-        marker._init();
-        
-        // Display the marker
-        // TODO: in the context of this function, "this" is not spotMap, but the map itself so... ugly workaround
-        marker.LMarker.addTo(spotMap.map);
-
-        // store the marker
-        spotMap.geoPosition.marker = marker;
-
-    };
-
-    self.onLocationError = function (e) {
-        //TODO
-    };
-
-
-    self.focusOnMarker = function (id) {
+    this.focusOnMarker = function (id) {
         var LMarker = this.markers.getItem(id).LMarker;
         // Pan the map to the marker (smooth move)
         this.map.panTo(LMarker._latlng);
@@ -117,7 +81,7 @@ var SpotMap = (function _SpotMap() {
         LMarker.openPopup();
     };
 
-    self.displayMap = function (position) {
+    this.displayMap = function (position) {
         if (typeof position === "undefined") {
             //If no position is specified, load geoCoords
             this.map.setView([this.geoPosition.coords.latitude, this.geoPosition.coords.longitude], 10);
@@ -126,12 +90,13 @@ var SpotMap = (function _SpotMap() {
         }
     };
 
-    self.addMarker = function (marker) {
+    this.addMarker = function (marker) {
         var oldMarker = this.markers.getItem(marker.id);
         if (typeof oldMarker === "undefined") {
 
             // Display the marker
-            marker.LMarker.addTo(this.map);
+            //marker.LMarker.addTo(this.map);
+            this.map.addLayer(marker.LMarker);
 
             // if specified, display the label in a popup
             //if (typeof marker.label != "undefined") {
@@ -155,66 +120,89 @@ var SpotMap = (function _SpotMap() {
 		oldMarker.LMarker.setLatLng(newLatLng); 
 
 		// Store the new marker
-		self.markers.setItem(_marker.id, marker);
+		this.markers.setItem(_marker.id, marker);
 	    }
 	}*/
     };
 
-    self.clear = function (options) {
+    this.clear = function (options) {
+        //console.log(this.map);
         // Loop on all markers
-        this.markers.each(function (k, marker) {
-            // Remove marker from map
-            marker.clear(this.map);
-            // Remove marker from hashtable
-            this.markers.removeItem(k);
-        });
+        for (var k in this.markers.items) {
+            if (this.markers.hasItem(k)) {
+                this.map.removeLayer(this.markers.items[k].LMarker);
+                this.markers.removeItem(k);
+            }
+        }
         // Reset the map bounds, used to adjust the view
         this.bounds = [];
     };
 
+};
 
-    return self;
-}());
+function onLocationFound(e) {
+    var radius = e.accuracy / 2;
+    var message = "You are within " + radius + " meters from this point";
+
+    // Update geoposition coords
+    //this.geoPosition.coords.latitude = e.latlng.lat;
+    //this.geoPosition.coords.longitude = e.latlng.lng;
+
+    // Create a new marker
+    var marker = new Marker({
+        id: 'geoPosition',
+        latitude: e.latlng.lat,
+        longitude: e.latlng.lng,
+        title: message,
+        draggable: true,
+        icon: 'icon-screenshot icon-large',
+        color: 'red'
+    });
+    
+    // Display the marker
+    // TODO: in the context of this function, "this" is not spotMap, but the map itself so... ugly workaround
+    spotMap.map.addLayer(marker.LMarker);
+
+    // store the marker
+    spotMap.geoPosition.marker = marker;
+};
+
+function onLocationError(e) {
+    //TODO
+};
 
 
+function Marker(options) {
 
-var Marker = (function _Marker() {
+    var LMarkerOptions = {};
+    this.id = options.id;
+    // if marker is draggable
+    if (options.draggable)
+        LMarkerOptions.draggable = true;
 
-    var self = Object.create({});
+    // if a special icon has been specified
+    if (options.icon && options.color) {
+        var icon = L.AwesomeMarkers.icon({
+            icon: options.icon,
+            color: options.color
+        })
+        LMarkerOptions.icon = icon;
+    }
+    this.latitude = options.latitude;
+    this.longitude = options.longitude;
 
-    self._init = function _init() {
+    // Create Leaflet marker
+    this.LMarker = L.marker([this.latitude, this.longitude], LMarkerOptions);
 
-        var options = {};
-
-        // if marker is draggable
-        if (this.draggable)
-            options.draggable = true;
-
-        // if a special icon has been specified
-        if (this.icon && this.color) {
-            var icon = L.AwesomeMarkers.icon({
-                icon: this.icon,
-                color: this.color
-            })
-            options.icon = icon;
-        }
-
-        // Create Leaflet marker
-        this.LMarker = L.marker([this.latitude, this.longitude], options);
-
-        if (typeof this.title != "undefined") {
-            this.LMarker.bindPopup(this.title);
-        }
-
-        return this;
-    };
-
-    self.clear = function (map) {
-        map.removeLayer(this.LMarker);
+    if (typeof options.title != "undefined") {
+        this.LMarker.bindPopup(options.title);
     }
 
-    return self;
-}());
+    /*this.clear = function (map) {
+        //console.log(map);
+        map.removeLayer(this.LMarker);
+    }*/
+};
 
 function HashTable(obj) {
     this.length = 0;

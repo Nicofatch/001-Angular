@@ -107,14 +107,14 @@
 
 @media (min-width:768px) {
 	#map-tags-container {
-		float:right;
+		
 	}
 	#map-tag-addFormGroup {
 		/* TODO: à affiner car ne passe pas sur la fin de screen-sm*/;
 		width:200px;
 	}
 	#map-tags {
-		float:right;
+	
 	}
 }
 

@@ -1,13 +1,13 @@
   
-    <div class="col-lg-3 col-md-4" style="position:fixed;bottom:0; top:70px;">
+    <div class="col-lg-3 col-md-4">
 
       <div class="panel panel-default">
         <div class="panel-body">
           <h1 id="map-title">{{map.title}}</h1>
           <p>{{map.description}}</p>
           <div id="map-tags-container">        
-            <span data-ui-view="newTags" class="pull-right" id="mag-tag-addLink-container">
-              <a ui-sref="map.tags({mapId:$stateParams.mapId})" id="map-tag-addLink"><i class="icon-tags"></i> Add tags</a>
+            <span data-ui-view="newTags" id="mag-tag-addLink-container">
+              <a ui-sref="map.tags({mapId:$stateParams.mapId})" class="pull-left" id="map-tag-addLink"><i class="icon-tags"></i> Add tags</a>
             </span>
             <div class="row">&nbsp;</div>
             <span id="map-tags">
@@ -19,20 +19,16 @@
             </span> 
 
           </div>
-        </div>
-      </div>
-      <div class="panel panel-default panel-body">
-      
+        
+     
   		<!-- NEW SPOT -->
-  		<div class="list-group">
-  			<div data-ui-view="newSpot">
+  			<div data-ui-view="newSpot" style="margin-top:10px">
           <a ui-sref="map.new({mapId:$stateParams.mapId})" class="btn btn-success col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align:center;">
             <span><i class="icon-map-marker"></i> <b>Add a Spot</b></span>
           </a>
   			</div>
-  		
-    </div>
   </div>
+</div>
       <div ng-show="!map.spots.length" class="well">
         This map contains no Spot yet. <a ui-sref="map.new({mapId:$stateParams.mapId})">Add a spot</a>.
       </div>
@@ -60,20 +56,23 @@
   			</div>
   		  </div>
       </div>
+      <div ui-view="main">
+        <div style="padding-left:0px" class="col-lg-1">
+            <p><a style="width:49px;" ui-sref="map.info({mapId:$stateParams.mapId})" class="btn btn-default btn-lg"><i class="icon-edit"></i></a></p>
+            <p><a style="width:49px;" ui-sref="map.info({mapId:$stateParams.mapId})" class="btn btn-default btn-lg"><i class="icon-info"></i></a></p>
+            <p><a style="width:49px;" ui-sref="map.info({mapId:$stateParams.mapId})" class="btn btn-default btn-lg"><i class="icon-comments"></i></a></p>
+            <p><a style="width:49px;" ui-sref="map.info({mapId:$stateParams.mapId})" class="btn btn-default btn-lg"><i class="icon-link"></i></a></p>
+            <p><a style="width:49px;" ui-sref="map.info({mapId:$stateParams.mapId})" class="btn btn-default btn-lg"><i class="icon-gear"></i></a></p>
+        </div>  
+      </div>
   
 
   <!-- JS DOM -->
   <script>
   
-  var spotMap;
-
+  
   $(document).ready(function(){
-      // Initialize the map
-	    spotMap = Object.create(SpotMap, {
-	    	map_id: { value: 'map' }
-	    });
-	    spotMap._init();
-
+  
 	    $('.header-tabs a').click(function (e) {
 	    	e.preventDefault()
 	    	$(this).tab('show')

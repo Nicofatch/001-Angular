@@ -8,7 +8,7 @@
 
 </style>
 
-<form class="form" role="form" style="margin-bottom:20px;" id="map-spot-new-form" ng-submit="insertSpot()">
+<form class="form well" role="form" style="margin-bottom:0px;" id="map-spot-new-form" ng-submit="insertSpot()">
   <div class="row">
     <div class="col-lg-12">
       <p class="lead">New Spot
@@ -58,26 +58,6 @@
         spotMap.centerOnGeoPosition();
       }
 
-      $('#newSpotLocationAddress').autocomplete({
-        paramName: 'q',
-        serviceUrl: 'http://nominatim.openstreetmap.org/search?format=json&limit=5&addressdetails=1',
-        onSelect: function (suggestion) {
-          spotMap.moveGeoMarker({lat:suggestion.data.lat, lng:suggestion.data.lng});
-        },
-        transformResult: function(response) {
-          return {
-            suggestions: $.map($.parseJSON(response), function(dataItem) {
-              /*var a = '';
-              if (dataItem.address.hasOwnProperty('road'))
-                a += dataItem.address.road + ', ';
-              if (dataItem.address.hasOwnProperty('city'))
-                a += dataItem.address.city + ', ';
-              if (dataItem.address.hasOwnProperty('country'))
-                a += dataItem.address.country;*/
-              return { value: dataItem.display_name , data: {lat:dataItem.lat, lng:dataItem.lon} };
-            })
-          };
-        }
-      });
+      
 
       </script>

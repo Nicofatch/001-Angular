@@ -14,11 +14,10 @@
     </head>
     <body>
 
-        <div id="map" style="position:fixed;right:0;left:0;top:0;bottom:0;"></div>
-
-        <div class="container">
+        <div id="map" style="position:fixed;right:0;left:0;top:54px;bottom:0;"></div>
+       
             <!-- NAV BAR -->
-            <nav class="navbar navbar-default " role="navigation">
+            <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
                 <div class="navbar-header">
                     <!-- SEARCH BUTTON FOR XS SCREENS -->
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
@@ -39,20 +38,20 @@
                 <!-- NAV BAR FOR SMALL, MEDIUM & LARGE SCREENS -->
                 <div class="collapse navbar-collapse navbar-ex1-collapse">
                     <!-- SEARCH FORM -->
-                    <form class="navbar-form navbar-left col-lg-7 col-md-6 col-sm-7" role="search">
-                        <div id="nav-search-spot" class="form-group col-lg-5 col-sm-5">
+                  <form class="navbar-form navbar-left col-lg-7 col-md-6 col-sm-7" style="margin-bottom:0px;margin-top:10px;" role="search">
+                        <div id="nav-search-spot" class="form-group col-lg-4 col-sm-4">
                             <div class="input-group">
-                                <span class="input-group-addon"><i class="icon-map-marker"></i></span>
-                                <input type="text" class="form-control" placeholder="Search">
+                                <span class="input-group-addon" style="height:34px;line-height:1.428571429;font-size:14px;"><i class="icon-map-marker"></i></span>
+                                <input type="text" class="form-control" style="height:34px;line-height:1.428571429;font-size:14px;" placeholder="Search">
                             </div>
                         </div>
-                        <div id="nav-search-location" class="form-group col-lg-5 col-sm-5">
+                        <div id="nav-search-location" class="form-group col-lg-4 col-sm-4">
                             <div class="input-group">
-                                <span class="input-group-addon"><i class="icon-location-arrow"></i></span>
-                                <input type="text" class="form-control" placeholder="Around">
+                                <span class="input-group-addon" style="height:34px;line-height:1.428571429;font-size:14px;"><i class="icon-location-arrow"></i></span>
+                                <input type="text" class="form-control" style="height:34px;line-height:1.428571429;font-size:14px;" placeholder="Around">
                             </div>
                         </div>
-                        <button id="nav-search-button" type="submit" class="btn btn-primary"> <i class="icon-search icon-white"></i></button>
+                        <button id="nav-search-button" type="submit" class="btn btn-primary" style="height:34px;line-height:1.428571429;font-size:14px;"> <i class="icon-search icon-white"></i></button>
                     </form> 
 
                     <!-- MENU LINKS FOR MEDIUM & LARGE SCREENS -->
@@ -71,9 +70,8 @@
                     </ul>
                 </div>
             </nav>
-        </div>
         
-        <div id="main" >
+        <div id="main" style="margin-top:70px;">
             <%- body %>
         </div>
             <!-- MAIN CONTENT -->

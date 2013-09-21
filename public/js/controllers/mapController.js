@@ -9,6 +9,7 @@ app.controller('MapController', function ($rootScope, $scope, $state, mapService
 
     function init() {
         console.log('MapController - init');
+        spotMap.clear();
         //$scope.spots = mapService.getSpots();
         mapService.getMap($stateParams.mapId).then(function(data) {
             $rootScope.map = data;
