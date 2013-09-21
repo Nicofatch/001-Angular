@@ -179,12 +179,12 @@
 		float:right;
 	}
 	.spot-info-container {
-		margin-left:25px;
+		margin-left:45px;
 	}
 }
 
 .spot-infos {
-	padding-left:0px;
+	/*padding-left:0px;*/
 }
 
 .spot-actions {

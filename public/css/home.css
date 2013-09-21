@@ -1,5 +1,5 @@
 
-#home-intro { 
+#home-first { 
     background: url(../img/map.jpg) 100% 0 fixed; 
     height: auto;  
     margin: 0 auto; 
@@ -7,14 +7,40 @@
     position: relative; 
     padding: 100px 0;
 }
-#home-info { 
+#home-2 { 
     height: auto;  
     margin: 0 auto; 
     width: 100%; 
     position: relative; 
     padding: 200px 0;
 }
-#home-about { 
+
+#home-3 { 
+    background: url(../img/map.jpg) 100% 0 fixed; 
+    height: auto;  
+    margin: 0 auto; 
+    width: 100%; 
+    position: relative; 
+    padding: 200px 0;
+}
+
+#home-4 { 
+    height: auto;  
+    margin: 0 auto; 
+    width: 100%; 
+    position: relative; 
+    padding: 200px 0;
+}
+
+#home-5 { 
+    background: url(../img/map.jpg) 100% 0 fixed; 
+    height: auto;  
+    margin: 0 auto; 
+    width: 100%; 
+    position: relative; 
+    padding: 200px 0;
+}
+#home-last { 
     background: #eeeeee 50% 0 fixed; 
     height: auto;
     margin: 0 auto; 

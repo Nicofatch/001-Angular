@@ -41,26 +41,55 @@ app.controller('MapController', function ($rootScope, $scope, $state, mapService
         });
     }
 
-    $scope.selectSpot = function (spot) {   	
+    $scope.toggleSpotMenu = function(id) {
+        $('#spotMenu'+id).toggle();
+    }
+
+    $scope.removeSpotToggle = function(id) {
+        $('#spotMenu'+id).hide();
+        $('#spotMenuRemove'+id).toggle();
+    }
+
+    $scope.removeSpot = function(index) {
+        var spotId = $scope.map.spots[index]._id;
+        $scope.map.spots.splice(index,1);
+        mapService.updateMap($rootScope.map).then(function(data) {
+           $rootScope.map = data; 
+        });
+        spotMap.removeMarker(spotId);
+        spotMap.fitOnBounds();
+    }
+
+    $scope.selectSpot = function (id) {   	
 	   // Unselect current spot
 	   $scope.unselectSpot();
+       
+       $scope.toggleSpotMenu(id); 
 	   // Select new spot
-	   $scope.selectedSpot = spot;
+	   for (var i=0,l=$scope.map.spots.length;i<l;i++) {
+            if ($scope.map.spots[i]._id == id) {
+                $scope.selectedSpot = $scope.map.spots[i];
+                break;
+            }
+        }
 	   //$scope.selectedSpot.class = 'active';
     }
 
+
+    /* TODO C'est fatch */
     $scope.$watch('selectedSpot',function() {
-    	if ($scope.selectedSpot._id)
+        if ($scope.selectedSpot._id)
          spotMap.focusOnMarker($scope.selectedSpot._id);
     });
 
     /* TODO */
-    $scope.$watch('map.spots.length', function() {
+    /*$scope.$watch('map.spots.length', function() {
         if (typeof $rootScope.map.spots != "undefined")
             $rootScope.map.spots.sort(function(a,b){return b._id-a._id});
-    });
+    });*/
 
     $scope.unselectSpot = function () {
+        $scope.toggleSpotMenu($scope.selectedSpot._id);
     	//$scope.selectedSpot.class = '';
     	$scope.selectedSpot = '';
     }

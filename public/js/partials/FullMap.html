@@ -33,28 +33,52 @@
         This map contains no Spot yet. <a ui-sref="map.new({mapId:$stateParams.mapId})">Add a spot</a>.
       </div>
   		<!-- SPOTS LIST -->
-  		<div class="list-group">
-  			<div data-ng-repeat="spot in map.spots">
-  				<a class="list-group-item container" role="spot-item" ng-click="selectSpot(spot)">
-  					<div class="spot-infos col-lg-9 col-sm-9 col-md-9 col-xs-10">
-  						<span class="spot-icon-container visible-lg visible-sm visible-md">
-  							<i class="icon-map-marker icon-2x spot-icon"></i>
-  						</span>
-  						<div class="spot-info-container">
-  							<h4 class="list-group-item-heading" role="spot-title">{{spot.title}}</h4>
-  							<p class="list-group-item-text">{{spot.description}}</p>
-  							<p class="hide" role="spot-longitude">{{spot.longitude}}</p>
-  							<p class="hide" role="spot-latitude">{{spot.latitude}}</p>
-  							<p class="hide" role="spot-id">{{spot._id}}</p>
-  						</div>
-  						<div display-marker></div>
-  					</div> 
-  					<div class="spot-actions col-lg-3 col-sm-3 col-md-3 col-xs-12">
-  						<button class="btn pull-right"><i class="icon-plus"></i></button>
-  					</div>
-  				</a>
-  			</div>
-  		  </div>
+  		
+      <div data-ng-repeat="spot in map.spots">
+        <div class="panel panel-default" role="spot-item">
+          <div class="panel-heading">
+            <div class="row">
+              <div class="spot-infos col-lg-12">
+                <span class="spot-icon-container visible-lg visible-sm visible-md">
+                  <button class="btn btn-default" ng-click="selectSpot(spot._id)"><span style="font-size:1em;"><b>{{$index+1}}</b></span></button>
+                </span>
+                <div class="spot-info-container">
+                  <!-- <button class="btn btn-default pull-right" ng-click="selectSpot(spot)"><i class="icon-map-marker icon-large"></i></button> -->
+                  <h4 class="list-group-item-heading" style="padding-top:6px;"><a href ng-click="selectSpot(spot._id)" role="spot-title"><b>{{spot.title}}</b></a></h4>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="panel-heading" id="spotMenuRemove{{spot._id}}" style="display:none">
+            <div class="row">
+              <div class="col-lg-6">
+                <button class="btn btn-danger col-lg-12" ng-click="removeSpot($index)">Remove Spot</button>
+              </div>
+              <div class="col-lg-6">
+                <button class="btn btn-success col-lg-12" ng-click="removeSpotToggle(spot._id)">Cancel</button>
+              </div>
+            </div>
+          </div>
+          <div class="panel-heading" id="spotMenu{{spot._id}}" style="display:none">
+            <button class="btn btn-default" ng-click="selectSpot(spot._id)"><i class="icon-edit icon-large"></i></button>
+            <button class="btn btn-default" ng-click="selectSpot(spot._id)"><i class="icon-info icon-large"></i></button>
+            <button class="btn btn-default" ng-click="selectSpot(spot._id)"><i class="icon-camera icon-large"></i></button>
+            <button class="btn btn-default" ng-click="selectSpot(spot._id)"><i class="icon-link icon-large"></i></button>
+            <button class="btn btn-default pull-right" ng-click="removeSpotToggle(spot._id)"><i class="icon-trash icon-large"></i></button>
+          </div>
+          <div class="panel-body">
+            <p class="list-group-item-text">{{spot.description}}</p>
+            <p class="hide" role="spot-longitude">{{spot.longitude}}</p>
+            <p class="hide" role="spot-latitude">{{spot.latitude}}</p>
+            <p class="hide" role="spot-id">{{spot._id}}</p>
+            <div display-marker></div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
       </div>
       <div ui-view="main">
         <div style="padding-left:0px" class="col-lg-1">

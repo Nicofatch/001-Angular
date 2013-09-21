@@ -18,16 +18,16 @@ app.controller('NewSpotController', function ($rootScope, $scope, $state, mapSer
         };
 
         $rootScope.map.spots.splice(0,0,spot);
-            mapService.updateMap($rootScope.map).then(function(data) {
+        mapService.updateMap($rootScope.map).then(function(data) {
             $rootScope.map = data;
         });
 	    // Remove the geo marker
         spotMap.removeGeoMarker();
-
+        
         // Adjust the map
         spotMap.fitOnBounds();
-
-	    // Redirect to parent (map)
+	    
+        // Redirect to parent (map)
 	    $state.go('map');
     };
 

@@ -2,13 +2,19 @@ app.service('mapService', function ($http) {
 
   this.getMaps = function() {
     return $http({method: 'GET', url: 'http://192.168.137.10:5001/API/maps'}).then(function(result) {
-           return result.data;
+      return result.data;
     });
   };
 
   this.getMap = function (id) {
     return $http({method: 'GET', url: 'http://192.168.137.10:5001/API/maps/'+id}).then(function(result) {
-           return result.data;
+      return result.data;
+    });
+  };
+
+  this.deleteMap = function (id) {
+    return $http({method: 'DELETE', url: 'http://192.168.137.10:5001/API/maps/'+id}).then(function(result) {
+      return result.data;
     });
   };
 

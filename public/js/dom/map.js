@@ -9,7 +9,11 @@ function SpotMap(map_id) {
 
     this.map_id = map_id;
     // Create the map
-    this.map = L.map(this.map_id);
+    this.map = L.map(this.map_id, {scrollWheelZoom : false, zoomControl : false});
+    
+    var zoomControl = new L.Control.Zoom({position:'topright'});
+    zoomControl.addTo(this.map);
+    
     this.markers = new HashTable();
 	this.bounds = [];
 	this.geoPosition = {};
@@ -50,7 +54,6 @@ function SpotMap(map_id) {
     };
 
     this.moveGeoMarker = function (latlng) {
-        console.log(latlng);
         this.geoPosition.marker.LMarker._latlng.lat = latlng.lat;
         this.geoPosition.marker.LMarker._latlng.lng = latlng.lng;
         this.geoPosition.marker.LMarker.update();
@@ -137,6 +140,14 @@ function SpotMap(map_id) {
         // Reset the map bounds, used to adjust the view
         this.bounds = [];
     };
+
+    this.removeMarker = function (id) {
+        var marker = this.markers.getItem(id);
+        var boundsIndex = this.bounds.indexOf(marker.LMarker._latlng);
+        this.map.removeLayer(marker.LMarker);
+        this.markers.removeItem(id);
+        this.bounds.splice(boundsIndex,1);
+    }
 
 };
 
