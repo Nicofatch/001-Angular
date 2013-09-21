@@ -7,16 +7,29 @@ angular.module('app')
           .otherwise('/');
         $stateProvider
       	  .state('map', {
-      	      url:'/{mapId:[0-9]{1,4}}',
-              templateUrl:'/js/partials/Map.html',
-              /*templateUrl:'/js/partials/SpotNewFormButton.html',*/
+      	      url:'/:mapId',
+              templateUrl:'/js/partials/FullMap.html',
               controller: 'MapController'
       	  })
       	  .state('map.new', {
       	      url: '/new',
-      	      templateUrl:'/js/partials/SpotNewForm.html',
-              controller: 'NewSpotController'
-      	  });
+      	      views: {
+                'newSpot': {
+                  templateUrl: '/js/partials/SpotNewForm.html',
+                  controller: 'NewSpotController'
+                }
+              }              
+      	  })
+          .state('map.tags', {
+              url: '/tags',
+              views: {
+                // So this one is targeting the unnamed view within the parent state's template.
+                'newTags': {
+                  templateUrl: '/js/partials/TagsNewForm.html',
+                  controller: 'NewTagsController'
+                }
+              }
+          });
       }
     ]
   );

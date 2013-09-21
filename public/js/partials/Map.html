@@ -1,4 +1,5 @@
   <!-- PANEL HEADING -->
+  <!-- PANEL HEADING -->
   <div class="panel-heading">
   	<!-- AddThis Button BEGIN -->
   	<div class="addthis_toolbox addthis_default_style ">
@@ -8,37 +9,56 @@
   		<a class="addthis_counter addthis_pill_style"></a>
   	</div>
   	<script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
-  	<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-520613fc20d317d5"></script>
+  	<!--<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-520613fc20d317d5"></script>-->
   	<!-- AddThis Button END -->
   </div>
 
   <!-- PANEL BODY -->
   <div class="panel-body">
   	<!-- MAP TITLE -->
-  	<div class="col-lg-8">
-  		<h1 id="map-title">{{map.title}}</h1>
-  	</div>
-  	<div class="col-lg-4 pull-left" style="margin-top:15px; margin-bottom:15px">
-  		<div class="pull-right">
-  			<span class="label label-info">x cinema</span> <span class="label label-default">x chaise</span>
-  		</div>
-  	</div>
+  	<div class="row" style="margin-bottom:10px;">
+      <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+      <h1 id="map-title">{{map.title}}</h1>
+      <p>{{map.description}}</p>
+    </div>
+    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+      <div id="map-tags-container">        
+        <span data-ui-view="newTags" class="pull-right" id="mag-tag-addLink-container">
+          <a ui-sref="map.tags({mapId:$stateParams.mapId})" id="map-tag-addLink"><i class="icon-tags"></i> Add tags</a>
+        </span>
+        
+        <div class="row">&nbsp;</div>
+        
+        <span id="map-tags">
+          <span data-ng-repeat="tag in map.tags" style="display:inline-block">
+            <button ng-click="deleteTag(tag)" class="btn btn-link btn-tag">
+              <span ng-class="tagClass($index)">x {{tag}}</span>
+            </button> 
+          </span> 
+        </span> 
+
+      </div>
+    </div>
+  </div>
 
   	<!-- LEFT ZONE -->
   	<div  style="clear:both" id="map-left" class="col-lg-4">      
-  		<!-- NEW SPOT BUTTON -->
+  		<!-- NEW SPOT -->
   		<div class="list-group">
-  			<div data-ui-view="">
-  				<a ui-sref="map.new({mapId:$stateParams.mapId})" class="btn btn-success col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align:center;">
-  					<span><i class="icon-map-marker"></i> <b>Add a new Spot</b></span>
-  				</a>	
+  			<div data-ui-view="newSpot">
+          <a ui-sref="map.new({mapId:$stateParams.mapId})" class="btn btn-success col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align:center;">
+            <span><i class="icon-map-marker"></i> <b>Add a Spot</b></span>
+          </a>
   			</div>
   		</div>
+      <div ng-show="!map.spots.length" class="well">
+        This map contains no Spot yet. <a ui-sref="map.new({mapId:$stateParams.mapId})">Add a spot</a>.
+      </div>
   		<!-- SPOTS LIST -->
   		<div class="list-group">
-  			<div data-ng-repeat="spot in map.spots | orderBy:_id">
-  				<a class="list-group-item container" ng-class="spot.class" role="spot-item" ng-click="selectSpot(spot)">
-  					<div class="spot-infos col-lg-8 col-sm-8 col-md-8 col-xs-10">
+  			<div data-ng-repeat="spot in map.spots">
+  				<a class="list-group-item container" role="spot-item" ng-click="selectSpot(spot)">
+  					<div class="spot-infos col-lg-9 col-sm-9 col-md-9 col-xs-10">
   						<span class="spot-icon-container visible-lg visible-sm visible-md">
   							<i class="icon-map-marker icon-2x spot-icon"></i>
   						</span>
@@ -51,12 +71,11 @@
   						</div>
   						<div display-marker></div>
   					</div> 
-  					<div class="spot-actions col-lg-4 col-sm-4 col-md-4 col-xs-12">
+  					<div class="spot-actions col-lg-3 col-sm-3 col-md-3 col-xs-12">
   						<button class="btn pull-right"><i class="icon-plus"></i></button>
   					</div>
   				</a>
   			</div>
-
   		</div>
   	</div>
 
@@ -90,7 +109,7 @@
   var spotMap;
 
   $(document).ready(function(){
-	    // Initialize the map
+      // Initialize the map
 	    spotMap = Object.create(SpotMap, {
 	    	map_id: { value: 'map' }
 	    });

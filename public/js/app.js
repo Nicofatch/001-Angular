@@ -7,7 +7,9 @@ var app = angular.module('app',["ui.router","ui.utils"]).run(
           // to active whenever 'contacts.list' or one of its decendents is active.
           $rootScope.$state = $state;
         $rootScope.$stateParams = $stateParams;
-      }]);
+      }]).config(function($httpProvider){
+    delete $httpProvider.defaults.headers.common['X-Requested-With'];
+  });
 
 //This configures the routes and associates each route with a view and a controller
 /*app.config(function ($routeProvider) {

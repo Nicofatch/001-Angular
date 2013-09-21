@@ -4,7 +4,8 @@
 <% stylesheet('/css/vendor/select2.css') -%>
 
 <!-- VENDOR JS -->
-<% script('//ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js') -%>
+<!-- script('//ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js') -%>-->
+<% script('/js/vendor/angular.min.js') -%>
 <% script('/js/vendor/angular-ui-router.js') -%>
 <% script('/js/vendor/ui-utils.min.js') -%>
 <% script('/js/vendor/select2.min.js') -%>
@@ -25,6 +26,7 @@
     <li class=""><a href="#last-contributions" data-toggle="tab"><i class="icon-pencil"></i> Last Contributions</a></li>
     <li class=""><a href="#hot" data-toggle="tab"><i class="icon-star"></i> Hot</a></li>
     <div class="pull-right" data-ui-view="newMapButton">
+      <a class="btn btn-success" ui-sref="new"><i class="icon-plus-sign"></i> Create a Map</a>
     </div>
   </ul>
 <div class="panel-body" data-ng-controller="MapsController">
@@ -80,7 +82,7 @@
 
     </div>
 
-    <div data-ng-repeat="map in maps">  
+    <div data-ng-repeat="map in maps | orderBy:'modificationDate':true">  
       <div class="row" style="height:100%">
           
         <div class="col-lg-9 col-md-8 col-sm-8 col-xs-12">
@@ -99,8 +101,9 @@
         <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
           <span class="pull-right">
             <small>Modified 3 days ago</small> 
-            <span class="badge badge-primary"><i class="icon-map-marker"></i> <b>{{map.markers_count}}</b></span> 
+            <span class="badge badge-primary"><i class="icon-map-marker"></i> <b>{{map.spots.length}}</b></span> 
             <span class="badge badge-primary"><i class="icon-user"></i> <b>{{map.contributors_count}}</b></span>
+            <span ng-show="map.private" class="badge badge-primary"><i class="icon-lock"></i></span>
           </span>
         </div>
       </div>

@@ -4,12 +4,22 @@
 			<i class="icon-globe icon-3x visible-lg visible-sm visible-md map-icon"></i> 
 		</span>
 		<div class="map-info-container">
-			<form role="form" id="maps-new-map">
+			<form role="form" id="maps-new-map" ng-submit="insertMap()">
 				<div class="row">
 					<div class="col-lg-6">
 						<div class="form-group">
 							<label for="newMapTitle" class="sr-only">Title</label>
 							<input type="text" id="newMapTitle" placeholder="Title" data-ng-model="newMap.title" class="form-control">
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-6">
+						<div class="form-group">
+							<div class="btn-group btn-group-justified">
+						        <a ui-sref="new" ng-click="visibility = public" ng-class="{'btn btn-primary': visibility == public,'btn btn-default': visibility == private}" id="newMapPublic" data-ng-model="newMap.public">Public</a>
+						        <a ui-sref="new" ng-click="visibility = private" ng-class="{'btn btn-primary': visibility == private,'btn btn-default': visibility == public}" id="newMapPrivate" data-ng-model="newMap.private">Private</a>
+						    </div>
 						</div>
 					</div>
 				</div>
@@ -86,7 +96,7 @@
 				</div>
 
 				<div class="form-group">
-					<button data-ng-click="insertMap()" data-ng-disabled="!newMap.title" class="btn btn-primary">Add Map</button>
+					<button data-ng-disabled="!newMap.title" class="btn btn-primary">Add Map</button>
 				</div>
 
 			</form>
@@ -94,7 +104,7 @@
 	</div>
 	<div class="col-lg-2">
 		<span class="pull-right">
-			<a href="#/"><span class="badge badge-important">x close</span></a>
+			<a ui-sref="maps"><span class="badge badge-important">x close</span></a>
 		</span>
 	</div>
 </div>

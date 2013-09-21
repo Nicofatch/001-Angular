@@ -1,0 +1,83 @@
+  
+    <div class="col-lg-3 col-md-4" style="position:fixed;bottom:0; top:70px;">
+
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <h1 id="map-title">{{map.title}}</h1>
+          <p>{{map.description}}</p>
+          <div id="map-tags-container">        
+            <span data-ui-view="newTags" class="pull-right" id="mag-tag-addLink-container">
+              <a ui-sref="map.tags({mapId:$stateParams.mapId})" id="map-tag-addLink"><i class="icon-tags"></i> Add tags</a>
+            </span>
+            <div class="row">&nbsp;</div>
+            <span id="map-tags">
+              <span data-ng-repeat="tag in map.tags" style="display:inline-block">
+                <button ng-click="deleteTag(tag)" class="btn btn-link btn-tag">
+                  <span ng-class="tagClass($index)">x {{tag}}</span>
+                </button> 
+              </span> 
+            </span> 
+
+          </div>
+        </div>
+      </div>
+      <div class="panel panel-default panel-body">
+      
+  		<!-- NEW SPOT -->
+  		<div class="list-group">
+  			<div data-ui-view="newSpot">
+          <a ui-sref="map.new({mapId:$stateParams.mapId})" class="btn btn-success col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align:center;">
+            <span><i class="icon-map-marker"></i> <b>Add a Spot</b></span>
+          </a>
+  			</div>
+  		
+    </div>
+  </div>
+      <div ng-show="!map.spots.length" class="well">
+        This map contains no Spot yet. <a ui-sref="map.new({mapId:$stateParams.mapId})">Add a spot</a>.
+      </div>
+  		<!-- SPOTS LIST -->
+  		<div class="list-group">
+  			<div data-ng-repeat="spot in map.spots">
+  				<a class="list-group-item container" role="spot-item" ng-click="selectSpot(spot)">
+  					<div class="spot-infos col-lg-9 col-sm-9 col-md-9 col-xs-10">
+  						<span class="spot-icon-container visible-lg visible-sm visible-md">
+  							<i class="icon-map-marker icon-2x spot-icon"></i>
+  						</span>
+  						<div class="spot-info-container">
+  							<h4 class="list-group-item-heading" role="spot-title">{{spot.title}}</h4>
+  							<p class="list-group-item-text">{{spot.description}}</p>
+  							<p class="hide" role="spot-longitude">{{spot.longitude}}</p>
+  							<p class="hide" role="spot-latitude">{{spot.latitude}}</p>
+  							<p class="hide" role="spot-id">{{spot._id}}</p>
+  						</div>
+  						<div display-marker></div>
+  					</div> 
+  					<div class="spot-actions col-lg-3 col-sm-3 col-md-3 col-xs-12">
+  						<button class="btn pull-right"><i class="icon-plus"></i></button>
+  					</div>
+  				</a>
+  			</div>
+  		  </div>
+      </div>
+  
+
+  <!-- JS DOM -->
+  <script>
+  
+  var spotMap;
+
+  $(document).ready(function(){
+      // Initialize the map
+	    spotMap = Object.create(SpotMap, {
+	    	map_id: { value: 'map' }
+	    });
+	    spotMap._init();
+
+	    $('.header-tabs a').click(function (e) {
+	    	e.preventDefault()
+	    	$(this).tab('show')
+	    })
+	    $('.header-tabs a:first').tab('show')
+	});
+  </script>

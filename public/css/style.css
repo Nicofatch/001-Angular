@@ -24,6 +24,25 @@
 	background-color:white !important;
 }
 
+.btn-tag {
+	margin:0;
+	padding:2px 0;
+	text-decoration:none;
+}
+
+.btn-tag:hover {
+	text-decoration:none;	
+}
+
+/******** AUTOCOMPLETE STYLING *****/
+
+.autocomplete-suggestions { border: 1px solid #999; background: #FFF; overflow: auto; }
+.autocomplete-suggestions { border: 1px solid #999; background: #FFF; overflow: auto;}
+.autocomplete-suggestion { padding: 2px 5px; white-space: nowrap; overflow: hidden; }
+.autocomplete-selected { background: #F0F0F0; }
+.autocomplete-suggestions strong { font-weight: normal; color: #3399FF; }
+
+
 /******* NAV BAR ********/
 
 @media (min-width:768px) {  
@@ -86,8 +105,45 @@
 
 /******* MAP ********/
 
+@media (min-width:768px) {
+	#map-tags-container {
+		float:right;
+	}
+	#map-tag-addFormGroup {
+		/* TODO: à affiner car ne passe pas sur la fin de screen-sm*/;
+		width:200px;
+	}
+	#map-tags {
+		float:right;
+	}
+}
+
+#maps-tags-container {
+	margin-top:10px;
+	display:inline-block;
+}
+
+@media (max-width:768px) {
+	#mag-tag-addLink-container {
+		width:100%;
+	}
+	#map-tags-container {
+		width:100%;
+	}
+}
+
+#map-tag-addLink {
+	margin-bottom:0;
+	margin-right:5px;
+}
+
+#map-tag-addLink-container {
+	display:inline-block;
+}
+
 #map-title {
 	margin-top:0px;
+	/*margin-bottom:0px;*/
 }  
 
 #map-right {
@@ -114,7 +170,7 @@
 }
 
 @media (min-width: 768px) {
-	#map { height: 400px; }
+	#map { height: 100%; }
 	.map-icon {
 		display: inline !important;
 		color:#777777;

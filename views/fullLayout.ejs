@@ -13,9 +13,12 @@
         <%-stylesheets%>
     </head>
     <body>
+
+        <div id="map" style="position:fixed;right:0;left:0;top:0;bottom:0;"></div>
+
         <div class="container">
             <!-- NAV BAR -->
-            <nav class="navbar navbar-default" role="navigation">
+            <nav class="navbar navbar-default " role="navigation">
                 <div class="navbar-header">
                     <!-- SEARCH BUTTON FOR XS SCREENS -->
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
@@ -68,53 +71,12 @@
                     </ul>
                 </div>
             </nav>
-
-            <!-- MAIN CONTENT -->
-            <div id="main">
-                <%- body %>
-            </div>
-
-            <!-- FOOTER -->
-            <footer id="footer">
-                <small>
-                    <hr>
-                    <div class="row">
-                        <div class="col-lg-2 col-md-2 col-sm-4 col-xs-12">
-                            <ul class="list-unstyled">
-                                <li>GitHub<li>
-                                <li><a href="#">About us</a></li>
-                                <li><a href="#">Blog</a></li>
-                                <li><a href="#">Contact & support</a></li>
-                                <li><a href="#">Enterprise</a></li>
-                                <li><a href="#">Site status</a></li>
-                            </ul>
-                        </div>
-                        <div class="col-lg-2 col-md-2 col-sm-4 col-xs-12">
-                            <ul class="list-unstyled">
-                                <li>Applications<li>
-                                <li><a href="#">Product for Mac</a></li>
-                                <li><a href="#">Product for Windows</a></li>
-                                <li><a href="#">Product for Eclipse</a></li>
-                                <li><a href="#">Product mobile apps</a></li>
-                            </ul>
-                        </div>
-                        <div class="col-lg-2 col-md-2 col-sm-4 col-xs-12">
-                            <ul class="list-unstyled">
-                                <li>More<li>
-                                <li><a href="#">Training</a></li>
-                                <li><a href="#">Students & teachers</a></li>
-                                <li><a href="#">The Shop</a></li>
-                                <li><a href="#">Plans & pricing</a></li>
-                                <li><a href="#">Contact us</a></li>
-                            </ul>
-                        </div>
-                        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 pull-right">
-                            <p class="muted pull-right">&copy; 2013 Company Name. All rights reserved</p>
-                        </div>
-                    </div>
-                </small>
-            </footer>
         </div>
+        
+        <div id="main" >
+            <%- body %>
+        </div>
+            <!-- MAIN CONTENT -->
 
         <!-- Vendor libs -->
         <!--<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
