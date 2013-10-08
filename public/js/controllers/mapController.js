@@ -57,7 +57,7 @@ app.controller('MapController', function ($rootScope, $scope, $state, mapService
            $rootScope.map = data; 
         });
         spotMap.removeMarker(spotId);
-        spotMap.fitOnBounds();
+        //spotMap.fitOnBounds();
     }
 
     $scope.selectSpot = function (id) {   	

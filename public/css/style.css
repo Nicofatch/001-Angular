@@ -1,3 +1,123 @@
+
+
+/******* HOME PAGE *************/
+
+.home-slider-top
+{
+	background: url(../img/bg.jpg) repeat-y center;
+	background-size: 100% auto;
+	z-index:10;
+}
+
+.home-slider-top-text
+{
+	text-align:center;
+	color:#fff;
+}
+
+.home-slider-top h1
+{
+	margin:40px 0 40px;
+	text-shadow: black 0px 3px 1px;
+	font-family: 'Grand Hotel', cursive;
+	font-size:6em
+}
+
+.home-slider-top h3
+{
+	margin-bottom: 40px;
+}
+
+.home-slider-top form
+{
+	margin:30px auto 0;
+}
+
+.home-slider-bottom
+{
+	margin-bottom:10px !important;
+	margin-top:20px !important;
+}
+
+#services {
+	padding:100px 0 100px 0;
+}
+
+.content-head
+{
+	margin: 0 0 60px;
+}
+.content-head h2
+{
+	color: #a5a5a5;
+	font-family: Montserrat,Sans-serif;
+	font-size: 20px;
+	font-weight: 300;
+	text-align: center;
+	text-transform: uppercase;
+}
+.line
+{
+	background: #aaa;
+	height: 1px;
+	margin: 0 auto;
+	width: 17%;
+}
+.services-info .ico
+{
+	margin: 0 auto;
+	text-align: center;
+}
+.services-info .desc
+{
+	text-align: center;
+}
+.services-info .desc h4
+{
+	color: #00a8ec;
+	font-size: 22px;
+	font-weight: 300;
+	margin: 35px 0 15px;
+}
+.services-info .desc p
+{
+	font-size: 13px;
+	line-height: 22px;
+	margin-bottom: 25px;
+}
+.services-info span:hover {
+	color:#3276b1;
+}
+
+.services-info span:hover .shadow {
+	text-shadow: #3276b1 0px 3px 1px;
+}
+
+.services-info span:active {
+	top:3px;
+
+}
+
+.services-info span:active .shadow {
+	text-shadow: 0px 0px 0px;
+}
+
+.shadow {
+	text-shadow: black 0px 3px 1px;
+}
+
+@media only screen and (max-width:767px)
+{
+	.top-content h3
+	{
+		display: none;
+	}
+	.services-info
+	{
+		margin-bottom: 25px;
+	}
+}
+
 /******* GENERIC STYLES ********/
 
 .badge-important {
@@ -46,12 +166,12 @@
 /******* NAV BAR ********/
 
 @media (min-width:768px) {  
-	#nav-search-location {
+	.search-location {
 		padding-left:0px;
 	}
 }
 @media (max-width:768px) {  
-	#nav-search-button {
+	.search-button {
 		position: relative;
 		min-height:   1px;
 		margin-right: 15px;
@@ -198,4 +318,11 @@
 
 .spot-icon-container {
 	float:left;
+}
+
+/******* Footer *********/
+.footer{
+	text-align:center;
+	background: #e6e6e6;
+	padding: 15px 0 10px;
 }

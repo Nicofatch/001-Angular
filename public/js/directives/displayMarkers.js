@@ -9,6 +9,7 @@ app.directive('displayMarker', [ '$timeout', function($timeout) {
 	link : function(scope, element, attrs) {
 		//console.log('display marker');
 		$timeout(function() {
+			console.log('displaying new markers...');
 			var spot = scope.spot;
 
 			// console.log(spot._id);

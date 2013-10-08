@@ -147,6 +147,7 @@ function SpotMap(map_id) {
         this.map.removeLayer(marker.LMarker);
         this.markers.removeItem(id);
         this.bounds.splice(boundsIndex,1);
+        //TODO : 
     }
 
 };

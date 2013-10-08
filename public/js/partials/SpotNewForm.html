@@ -41,23 +41,15 @@
       <button data-ng-disabled="!newSpot.title" class="btn btn-primary">Add Spot</button>
     </div>
   </form>
-  <script>
-  $('#newSpotTitle').focus();
-  $("#inputActivity").select2({
-   placeholder: "Activity"
- }).on("change", function(e) {
-  $('#s2id_inputActivity').css('width','100%');
-});
- $('#s2id_inputActivity').css('width','100%');
-      // If the current position is not already displayed, launch a new geoLocation
-      if (typeof spotMap.geoPosition.marker === "undefined") {
-        // The geoLocate function will calculate the position and then center the map on it
-        spotMap.geoLocate();
-      } else {
-        // Just center the map on the geoPosition
-        spotMap.centerOnGeoPosition();
-      }
-
-      
-
-      </script>
+<script>
+    $('#newSpotTitle').focus();
+    
+    // If the current position is not already displayed, launch a new geoLocation
+    if (typeof spotMap.geoPosition.marker === "undefined") {
+      // The geoLocate function will calculate the position and then center the map on it
+      spotMap.geoLocate();
+    } else {
+      // Just center the map on the geoPosition
+      spotMap.centerOnGeoPosition();
+    }
+</script>

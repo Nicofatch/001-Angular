@@ -1,16 +1,18 @@
 //This controller retrieves data from the mapService and associates it with the $scope
 //The $scope is ultimately bound to the map view
-app.controller('NewSpotController', function ($rootScope, $scope, $state, mapService, $stateParams) {
+app.controller('NewSpotController', function ($rootScope, $scope, $state, mapService, $stateParams, utilsService) {
     init();
+
     function init() {
         console.log('NewSpotController - init');
         $scope.locationGeo = 'geo';
         $scope.locationAddress = 'address';
         $scope.locationType = $scope.locationGeo;
     }
+    
     $scope.insertSpot = function () {
         var spot = {
-            _id: $rootScope.map.spots.length + 1,
+            _id: utilsService.guid(),
             title: $scope.newSpot.title,
             description: $scope.newSpot.description,
             longitude: spotMap.geoPosition.marker.LMarker._latlng.lng,

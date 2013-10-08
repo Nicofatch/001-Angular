@@ -7,10 +7,11 @@ app.controller('NewTagsController', function ($rootScope, $scope, $state, mapSer
         console.log('NewTagsController - init');
     }
     $scope.insertTags = function () {
-        var tags = $scope.newTags;
-        for (var i=0, l=tags.length;i<l;i++) {
-            if ($rootScope.map.tags.indexOf(tags[i]) < 0)
-                $rootScope.map.tags.push(tags[i]);
+        // TODO : make "ng-model" work instead
+        var tags = $('#inputTags').val();
+        for (var i=0, l=tags.split(',').length;i<l;i++) {
+            if ($rootScope.map.tags.indexOf(tags.split(',')[i]) < 0)
+                $rootScope.map.tags.push(tags.split(',')[i]);
         }
         
         mapService.updateMap($rootScope.map).then(function(data) {

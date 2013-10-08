@@ -16,7 +16,8 @@ app.controller('NewMapController', function ($scope, $state, mapService) {
        var map = {
             'title': $scope.newMap.title,
             'description': $scope.newMap.description,
-            'tags':$scope.newMap.tags,
+            //'tags':$scope.newMap.tags,
+            'tags':$('#inputTags').val().split(','),
             'private':($scope.visibility==='private'),
             'spots': []
        };
