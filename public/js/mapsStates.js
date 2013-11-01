@@ -9,32 +9,32 @@ angular.module('app')
         $stateProvider
           .state('maps', {
               url:'/',
-              templateUrl:'/js/partials/Maps.html',
+              templateUrl:'/js/partials/maps.html',
               controller: 'MapsController'
           })
           .state('maps.new', {  
-              url: '/new',
+              url: 'new',
               views: {
                 // So this one is targeting the unnamed view within the parent state's template.
                 'newMapButton': {
                   template: ''
                 },
                 'newMapForm': {
-                  templateUrl:'/js/partials/MapNewForm.html',
+                  templateUrl:'/js/partials/newMapForm.html',
                   controller: 'NewMapController'
                 }
               }
           })
           .state('map', {
               url:'/:mapId',
-              templateUrl:'/js/partials/FullMap.html',
+              templateUrl:'/js/partials/fullMap.html',
               controller: 'MapController'
           })
           .state('map.info', {
               url: '/info',
               views: {
                 'main': {
-                  templateUrl: '/js/partials/MapInfo.html'
+                  templateUrl: '/js/partials/mapInfo.html'
                 }
               }              
           })
@@ -42,7 +42,7 @@ angular.module('app')
               url: '/new',
               views: {
                 'newSpot': {
-                  templateUrl: '/js/partials/SpotNewForm.html',
+                  templateUrl: '/js/partials/newSpotForm.html',
                   controller: 'NewSpotController'
                 }
               }              
@@ -52,7 +52,7 @@ angular.module('app')
               views: {
                 // So this one is targeting the unnamed view within the parent state's template.
                 'newTags': {
-                  templateUrl: '/js/partials/TagsNewForm.html',
+                  templateUrl: '/js/partials/newTagsForm.html',
                   controller: 'NewTagsController'
                 }
               }

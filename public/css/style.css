@@ -1,5 +1,3 @@
-
-
 /******* HOME PAGE *************/
 
 .home-slider-top
@@ -165,12 +163,28 @@
 
 /******* NAV BAR ********/
 
+.navbar-imgToggle {
+	margin:0 !important;
+	padding:0 !important;
+	border:0 !important;
+}
+
 @media (min-width:768px) {  
 	.search-location {
 		padding-left:0px;
 	}
+
+	#navbar-user {
+		display:none !important;
+	}
+
+	#navbar-search {
+		display:none !important;
+	}
 }
+
 @media (max-width:768px) {  
+
 	.search-button {
 		position: relative;
 		min-height:   1px;
@@ -179,7 +193,6 @@
 		width:150px;
 	}
 	.navbar-nav {
-		float:left !important;
 	}
 	.navbar-nav > li {
 		float: left;
@@ -196,19 +209,19 @@
 @media (max-width: 768px) {
 	.nav-img a {
 		padding-top:0px !important;
-		padding-bottom:0 !important;
+		padding-bottom:0px !important;
 	}
 }
 
 @media (min-width: 768px) {
 	.nav-img a {
 		padding-top:10px !important;
-		padding-bottom:0 !important;
+		padding-bottom:10px !important;
 	}
 }
 
 #navbar-xs {
-	margin-left:10px;
+	margin-right:15px;
 }
 
 /******** MAPS ******/

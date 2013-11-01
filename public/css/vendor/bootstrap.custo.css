@@ -2778,7 +2778,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
     float: left;
   }
 }
-.navbar-collapse {
+.navbar-collapse, .navbar-collapse-sm {
   max-height: 340px;
   overflow-x: visible;
   padding-right: 15px;
@@ -2788,7 +2788,9 @@ textarea.input-group-sm > .input-group-btn > .btn {
   -webkit-overflow-scrolling: touch;
 }
 .navbar-collapse:before,
-.navbar-collapse:after {
+.navbar-collapse-sm:before,
+.navbar-collapse:after,
+.navbar-collapse-sm:after {
   content: " ";
   /* 1 */
 
@@ -2796,11 +2798,14 @@ textarea.input-group-sm > .input-group-btn > .btn {
   /* 2 */
 
 }
-.navbar-collapse:after {
+.navbar-collapse:after,
+.navbar-collapse-sm:after {
   clear: both;
 }
 .navbar-collapse:before,
-.navbar-collapse:after {
+.navbar-collapse-sm:before,
+.navbar-collapse:after,
+.navbar-collapse-sm:after {
   content: " ";
   /* 1 */
 
@@ -2808,10 +2813,12 @@ textarea.input-group-sm > .input-group-btn > .btn {
   /* 2 */
 
 }
-.navbar-collapse:after {
+.navbar-collapse:after,
+.navbar-collapse-sm:after {
   clear: both;
 }
-.navbar-collapse.in {
+.navbar-collapse.in,
+.navbar-collapse-sm.in, {
   overflow-y: auto;
 }
 @media (min-width: 768px) {
@@ -2839,6 +2846,33 @@ textarea.input-group-sm > .input-group-btn > .btn {
     margin-right: 0;
   }
 }
+
+@media (min-width: 992px) {
+  .navbar-collapse-sm {
+    width: auto;
+    border-top: 0;
+    box-shadow: none;
+  }
+  .navbar-collapse-sm.collapse {
+    display: block !important;
+    height: auto !important;
+    padding-bottom: 0;
+    overflow: visible !important;
+  }
+  .navbar-collapse-sm.in {
+    overflow-y: visible;
+  }
+  .navbar-collapse-sm .navbar-nav.navbar-left:first-child {
+    margin-left: -15px;
+  }
+  .navbar-collapse-sm .navbar-nav.navbar-right:last-child {
+    margin-right: -15px;
+  }
+  .navbar-collapse-sm .navbar-text:last-child {
+    margin-right: 0;
+  }
+}
+
 .container > .navbar-header,
 .container > .navbar-collapse {
   margin-right: -15px;

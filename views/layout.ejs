@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="<%= app%>">
+<html ng-app="app">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -13,67 +13,15 @@
         <%-stylesheets%>
     </head>
     <body>
-            <!-- NAV BAR -->
-            <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-                <div class="navbar-header">
-                    <!-- SEARCH BUTTON FOR XS SCREENS -->
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-                        <span class="sr-only">Toggle navigation</span>
-                        <i style="color:#777777" class="icon-search icon-large"></i>
-                    </button>
-                    <!-- APP TITLE -->
-                    <a class="navbar-brand" href="/" style="font-family: 'Grand Hotel', cursive;font-size:2em;">Spotly</a>
-                    <!-- MENU LINKS FOR XS SCREENS -->
-                    <ul class="nav navbar-nav visible-xs pull-right" id="navbar-xs">
-                        <li><a href="/map/#/1"><i class="icon-map-marker icon-large"></i></a></li>
-                        <li><a href="/maps/#"><i class="icon-globe icon-large"></i></a></li>
-                        <li><a href="/maps/#"><span class="badge badge-important">8</span></a></li>
-                        <li class="nav-img"><a href="/maps"><img src="/img/Avatar-128.png" class="img-small"></a></li>
-                    </ul>
-                </div>
+        <div id="map" style="position:fixed;right:0;left:0;top:53px;bottom:0;"></div>
 
-                <!-- NAV BAR FOR SMALL, MEDIUM & LARGE SCREENS -->
-                <div class="collapse navbar-collapse navbar-ex1-collapse">
-                    <!-- SEARCH FORM -->
-                    <form class="navbar-form navbar-left col-lg-7 col-md-6 col-sm-7" style="margin-bottom:0px;margin-top:10px;" role="search">
-                        <div id="nav-search-spot" class="form-group col-lg-4 col-sm-4">
-                            <div class="input-group">
-                                <span class="input-group-addon" style="height:34px;line-height:1.428571429;font-size:14px;"><i class="icon-map-marker"></i></span>
-                                <input type="text" class="form-control" style="height:34px;line-height:1.428571429;font-size:14px;" placeholder="Search">
-                            </div>
-                        </div>
-                        <div id="nav-search-location" class="form-group col-lg-4 col-sm-4">
-                            <div class="input-group">
-                                <span class="input-group-addon" style="height:34px;line-height:1.428571429;font-size:14px;"><i class="icon-location-arrow"></i></span>
-                                <input type="text" class="form-control" style="height:34px;line-height:1.428571429;font-size:14px;" placeholder="Around">
-                            </div>
-                        </div>
-                        <button id="nav-search-button" type="submit" class="btn btn-primary" style="height:34px;line-height:1.428571429;font-size:14px;"> <i class="icon-search icon-white"></i></button>
-                    </form> 
+        <!-- NAV BAR -->
+        <%- partial('navBar') %>
 
-                    <!-- MENU LINKS FOR MEDIUM & LARGE SCREENS -->
-                    <ul class="pull-right nav navbar-nav visible-lg visible-md">
-                        <li style="margin-top:2px"><a href="/map/#/1"><i class="icon-map-marker icon-large"></i> New Spot</a></li>
-                        <li style="margin-top:2px"><a href="/maps/#"><i class="icon-globe icon-large"></i> Maps</a></li>
-                        <li style="margin-top:2px"><a href="/maps/#"><span class="badge badge-important">8</span></a></li>
-                        <li style="margin-top:2px" class="nav-img"><a href="/maps"><img src="/img/Avatar-128.png" class="img-small"> Chaton</a></li>
-                    </ul>
-                    <!-- MENU LINKS FOR SMALL SCREENS -->
-                    <ul class="pull-right nav navbar-nav visible-sm">
-                        <li style="margin-top:2px"><a href="/map/#/1"><i class="icon-map-marker icon-large"></i></a></li>
-                        <li style="margin-top:2px"><a href="/maps/#"><i class="icon-globe icon-large"></i></a></li>
-                        <li style="margin-top:2px"><a href="/maps/#"><span class="badge badge-important">8</span></a></li>
-                        <li style="margin-top:2px" class="nav-img"><a href="/maps"><img src="/img/Avatar-128.png" class="img-small"></a></li>
-                    </ul>
-                </div>
-            </nav>
-
-            <!-- MAIN CONTENT -->
-            <div id="main" style="margin-top:54px">
-                <%- body %>
-            </div>
-
-           
+        <!-- MAIN CONTENT -->
+        <div id="main" <% if(navbar.fixed) { %> style="margin-top:70px;" <% } %>>
+            <%- body %>
+        </div>   
         <!-- Vendor libs -->
         <!--<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
         <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>       -->

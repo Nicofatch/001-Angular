@@ -4,11 +4,37 @@ var express = require('express')
   , path    = require('path')
   , async   = require('async')
   , engine = require('ejs-locals')
-  , ROUTES  = require('./routes')
-  , Router = require('./router');
+  , maps = require('./api/maps')
+  , tags = require('./api/tags')
+  , connection = require('./api/connection.js')
+  , db = require('./config/dbschema')
+  , pass = require('./config/pass')
+  , passport = require('passport')
+  , user_routes = require('./routes/user')
+  , basic_routes = require('./routes/basic');
+
+// global variables
+BSON = connection.BSON;
+db2 = connection.db;
+Constants = require('./constants');
 
 var app = express();
-var router = new Router();
+
+// ## CORS middleware
+// see: http://stackoverflow.com/questions/7067966/how-to-allow-cors-in-express-nodejs
+var allowCrossDomain = function(req, res, next) {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+
+    // intercept OPTIONS method
+    if ('OPTIONS' == req.method) {
+      res.send(200);
+    }
+    else {
+      next();
+    }
+};
 
 // use ejs-locals for all ejs templates:
 app.engine('ejs', engine);
@@ -19,28 +45,35 @@ app.set('port', process.env.PORT || 8080);
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.favicon(path.join(__dirname, 'public/img/favicon.ico')));
 app.use(express.logger("dev"));
-app.use(router);
+app.use(express.cookieParser());
+app.use(express.bodyParser());
+app.use(express.methodOverride());
+app.use(express.session({ secret: 'keyboard cat' }));
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(allowCrossDomain);
 
-for(var ii in ROUTES) {
-    router.get(ROUTES[ii].path, ROUTES[ii].fn);
-}
+// Site navigation requests
+app.get('/',basic_routes.home);
+app.get('/maps',pass.ensureAuthenticated,basic_routes.maps);
+app.get('/login',user_routes.getLogin);
+app.post('/login',user_routes.postLogin);
+app.get('/logout',user_routes.logout);
 
-//app.use(express.logger());
+// API requests
+app.get('/api/maps',maps.findAll);
+app.get('/api/maps/:id',maps.findById);
+app.post('/api/maps',maps.add);
+app.put('/api/maps/:id',maps.update);
+app.delete('/api/maps/:id',maps.delete);
 
-/*app.use(function(req,res,next) {
-    console.log('%s %s', req.method, req.url);
-    next();
-});*/
-/*app.use("/css", express.static(__dirname + '/css'));
-app.use("/fonts", express.static(__dirname + '/fonts'));
-app.use("/js", express.static(__dirname + '/js'));
-app.use("/app", express.static(__dirname + '/app'));
-app.use("/img", express.static(__dirname + '/img'));*/
+app.get('/api/tags',tags.findAll);
+app.get('/api/tags/search',tags.findByValue);
+app.get('/api/tags/:id',tags.findById);
+app.post('/api/tags',tags.add);
+app.put('/api/tags/:id',tags.update);
+app.delete('/api/tags/:id',tags.delete);
 
-/*app.get('/', function(request, response) {
-    var html = fs.readFileSync('./index.html').toString()
-    response.send(html);
-});*/
 
 var port = process.env.PORT || 5000;
 app.listen(port, function() {
