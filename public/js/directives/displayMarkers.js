@@ -16,8 +16,8 @@ app.directive('displayMarker', [ '$timeout', function($timeout) {
 			// Create a marker
 			var marker = new Marker({
 				id: spot._id,
-				latitude: spot.latitude,
-				longitude: spot.longitude,
+				latitude: spot.loc[1],
+				longitude: spot.loc[0],
 				title: spot.title,
 				draggable: false
 			});

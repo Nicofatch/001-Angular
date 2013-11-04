@@ -1,4 +1,5 @@
-var passport = require('passport');
+var passport = require('passport')
+    , url = require('url');
 
 exports.account = function(req, res) {
   res.render('account', { user: req.user });
@@ -17,7 +18,7 @@ exports.getLogin = function(req, res) {
     navbar: {
       fixed: false,
       search: false
-    } 
+    }
   });
   req.session.messages = null;
 };
@@ -35,6 +36,7 @@ exports.postLogin = function(req, res, next) {
     req.logIn(user, function(err) {
       if (err) { return next(err); }
       req.session.messages = null;
+      if (req.body.redirectUrl) { return res.redirect(req.body.redirectUrl); }
       return res.redirect('/');
     });
   })(req, res, next);

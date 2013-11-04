@@ -23,3 +23,16 @@ exports.maps = function(req,res) {
 	});
   	req.session.messages = null;	
 }
+
+exports.explore = function(req,res) {
+	res.render("explore", {
+	  title: Constants.APP_NAME,
+	  user: req.user,
+	  message: req.session.messages,
+	  navbar: {
+	  	fixed: true,
+	  	search: true
+	  }
+	});
+  	req.session.messages = null;	
+}

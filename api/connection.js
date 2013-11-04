@@ -16,7 +16,13 @@ db.open(function(err, db) {
                 populateMapsDB();
             }
         });
-	db.collection('tags', {strict:true}, function(err, collection) {
+        db.collection('spots', {strict:true}, function(err, collection) {
+            if (err) {
+                console.log("The 'spots' collection doesn't exist. Creating it with sample data...");
+                populateSpotsDB();
+            }
+        });
+	    db.collection('tags', {strict:true}, function(err, collection) {
             if (err) {
                 console.log("The 'tags' collection doesn't exist. Creating it with sample data...");
                 populateTagsDB();
@@ -107,6 +113,10 @@ var populateMapsDB = function() {
         collection.insert(maps, {safe:true}, function(err, result) {});
     });
 
+    db.collection('spots', function(err, collection) {
+        collection.insert(spots, {safe:true}, function(err, result) {});
+    });
+
 };
 
 /*--------------------------------------------------------------------------------------------------------------------*/
@@ -135,6 +145,40 @@ var populateTagsDB = function() {
 
 };
 
+var populateSpotsDB = function() {
+
+    var spots = [
+        {
+            "title": "paintball75",
+            "description": "Un super terrain de paintball",
+            "sports": "paintball",
+            "longitude": 2.340841,
+            "latitude": 48.8650429,
+            "_id": "1"
+        },
+        {
+            "title": "cinema de suresnes",
+            "description": "Le meilleur cinema du grand Ouest",
+            "sports": "cinema",
+            "longitude": 2.242201,
+            "latitude": 48.8649466,
+            "_id": "2"
+        },
+        {
+            "title": "bowling du chaton",
+            "description": "Le meilleur bowling pour chats",
+            "sports": "bowling",
+            "longitude": 2.302201,
+            "latitude": 48.9649466,
+            "_id": "3"
+        }
+    ];
+
+    db.collection('spots', function(err, collection) {
+        collection.insert(spots, {safe:true}, function(err, result) {});
+    });
+
+};
 
 exports.db = db;
 exports.BSON = BSON;

@@ -5,4 +5,22 @@ app.service('utilsService', function () {
             return v.toString(16);
         });
     }
+    this.getQueryStringParams = function(str) {
+        var queryString = str || window.location.search || '';
+        var keyValPairs = [];
+        var params      = {};
+        queryString     = queryString.replace(/.*?\?/,"").replace('#/','');
+
+        if (queryString.length) {
+            keyValPairs = queryString.split('&');
+            for (pairNum in keyValPairs) {
+                var key = keyValPairs[pairNum].split('=')[0];
+                if (!key.length) continue;
+                if (typeof params[key] === 'undefined')
+                    params[key] = [];
+                params[key].push(keyValPairs[pairNum].split('=')[1]);
+            }
+        }
+        return params;
+    }
 });

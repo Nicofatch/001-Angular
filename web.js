@@ -5,6 +5,7 @@ var express = require('express')
   , async   = require('async')
   , engine = require('ejs-locals')
   , maps = require('./api/maps')
+  , spots = require('./api/spots')
   , tags = require('./api/tags')
   , connection = require('./api/connection.js')
   , db = require('./config/dbschema')
@@ -59,6 +60,7 @@ app.get('/maps',pass.ensureAuthenticated,basic_routes.maps);
 app.get('/login',user_routes.getLogin);
 app.post('/login',user_routes.postLogin);
 app.get('/logout',user_routes.logout);
+app.get('/explore',basic_routes.explore);
 
 // API requests
 app.get('/api/maps',maps.findAll);
@@ -74,6 +76,9 @@ app.post('/api/tags',tags.add);
 app.put('/api/tags/:id',tags.update);
 app.delete('/api/tags/:id',tags.delete);
 
+app.get('/api/spots/generate', spots.generate);
+
+app.get('/api/spots/:lng/:lat',spots.search);
 
 var port = process.env.PORT || 5000;
 app.listen(port, function() {

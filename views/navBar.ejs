@@ -39,17 +39,17 @@
         <!-- Search nav bar -->
         <div class="navbar-collapse collapse" id="navbar-search">
             <ul class="nav navbar-nav col-xs-12" style="margin-left:10px;"> 
-                <form class="navbar-form navbar-left" style="margin-bottom:0px;margin-top:10px;" role="search">
+                <form class="navbar-form navbar-left" style="margin-bottom:0px;margin-top:10px;" role="explore" method="get" action="/explore">
                     <div id="nav-search-spot" class="form-group">
                         <div class="input-group">
                             <span class="input-group-addon" style="height:34px;line-height:1.428571429;font-size:14px;"><i class="icon-map-marker"></i></span>
-                            <input type="text" class="form-control" style="height:34px;line-height:1.428571429;font-size:14px;" placeholder="Search">
+                            <input type="text" class="form-control" style="height:34px;line-height:1.428571429;font-size:14px;" id="k-xs" name="k" placeholder="Search">
                         </div>
                     </div>
                     <div id="nav-search-location" class="form-group">
                         <div class="input-group">
                             <span class="input-group-addon" style="height:34px;line-height:1.428571429;font-size:14px;"><i class="icon-location-arrow"></i></span>
-                            <input type="text" class="form-control" style="height:34px;line-height:1.428571429;font-size:14px;" placeholder="Around">
+                            <input type="text" class="form-control" style="height:34px;line-height:1.428571429;font-size:14px;" id="l-xs" name="l" placeholder="Around">
                         </div>
                     </div>
                     <button id="nav-search-button" type="submit" class="btn btn-primary" style="height:34px;line-height:1.428571429;font-size:14px;">
@@ -63,17 +63,17 @@
     <!-- NAV BAR FOR SMALL, MEDIUM & LARGE SCREENS -->
     <div class="collapse navbar-collapse navbar-ex1-collapse">
         <% if (navbar.search) { %>
-            <form class="navbar-form navbar-left col-lg-7 col-md-9 col-sm-8 hidden-xs" style="margin-bottom:0px;margin-top:10px;" role="search">
+            <form class="navbar-form navbar-left col-lg-7 col-md-9 col-sm-8 hidden-xs" style="margin-bottom:0px;margin-top:10px;" role="explore" method="get" action="/explore">
                 <div id="nav-search-spot" class="form-group col-lg-5 col-md-5 col-sm-5">
                     <div class="input-group">
                         <span class="input-group-addon" style="height:34px;line-height:1.428571429;font-size:14px;"><i class="icon-map-marker"></i></span>
-                        <input type="text" class="form-control" style="height:34px;line-height:1.428571429;font-size:14px;" placeholder="Search">
+                        <input type="text" class="form-control" style="height:34px;line-height:1.428571429;font-size:14px;" id="k" name="k" placeholder="Search">
                     </div>
                 </div>
                 <div id="nav-search-location" class="form-group col-lg-5 col-md-5 col-sm-5">
                     <div class="input-group">
                         <span class="input-group-addon" style="height:34px;line-height:1.428571429;font-size:14px;"><i class="icon-location-arrow"></i></span>
-                        <input type="text" class="form-control" style="height:34px;line-height:1.428571429;font-size:14px;" placeholder="Around">
+                        <input type="text" class="form-control" style="height:34px;line-height:1.428571429;font-size:14px;" id="l" name="l" placeholder="Around">
                     </div>
                 </div>
                 <button id="nav-search-button" type="submit" class="btn btn-primary" style="height:34px;line-height:1.428571429;font-size:14px;"> <i class="icon-search icon-white"></i></button>
