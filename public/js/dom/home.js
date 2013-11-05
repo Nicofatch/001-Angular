@@ -1,10 +1,10 @@
 //==================== Slider js ========================//
 
 $(document).ready(function(){
-    $('#main-slider').flexslider({
+    /*$('#main-slider').flexslider({
         animation: "fade",
         slideshowSpeed: 7000
-    });
+    });*/
     $('#search-key').focus();
 
      $('#l').autocomplete({
@@ -17,6 +17,7 @@ $(document).ready(function(){
             }).done(function( data ) {
                 $('#lat').val(data.result.geometry.location.lat);
                 $('#lng').val(data.result.geometry.location.lng);
+                $('#home-explore-form').submit();
                 //$('#search-button').removeAttr('disabled');
             });
         },
@@ -33,6 +34,27 @@ $(document).ready(function(){
 	          return { value: dataItem.description , data: dataItem.reference };
 	        })
 	      };
+        }
+    });
+    $('#k').autocomplete({
+        paramName: 'input',
+        serviceUrl: 'http://192.168.137.10:5000/api/tags/search/',
+        onSelect: function (suggestion) {
+            //$('#l').focus();
+        },
+        transformResult: function(response) {
+          return {
+            suggestions: $.map($.parseJSON(response), function(dataItem) {
+              /*var a = '';
+              if (dataItem.address.hasOwnProperty('road'))
+                a += dataItem.address.road + ', ';
+              if (dataItem.address.hasOwnProperty('city'))
+                a += dataItem.address.city + ', ';
+              if (dataItem.address.hasOwnProperty('country'))
+                a += dataItem.address.country;*/
+              return { value: dataItem.value , data: dataItem.value };
+            })
+          };
         }
     });
 });

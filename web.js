@@ -78,7 +78,7 @@ app.delete('/api/tags/:id',tags.delete);
 
 app.get('/api/spots/generate', spots.generate);
 
-app.get('/api/spots/:lng/:lat',spots.search);
+app.get('/api/spots/:k/:lng/:lat',spots.search);
 
 var port = process.env.PORT || 5000;
 app.listen(port, function() {

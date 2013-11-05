@@ -1,6 +1,7 @@
 exports.findByValue = function(req, res) {
-    console.log('Retrieving tags with value contains [ ' + req.query.q + ']');
-    var query = { 'value': new RegExp('^' + req.query.q) };
+    var q = req.query.q || req.query.input;
+    console.log('Retrieving tags with value contains [ ' + q + ']');
+    var query = { 'value': new RegExp('^' + q, 'i') };
     db2.collection('tags', function(err,collection) {
         collection.find(query).toArray(function(err,items){
             res.send(items);

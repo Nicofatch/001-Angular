@@ -1,15 +1,21 @@
+var tags = require('./tags.js');
+
 exports.generate = function(req, res) {
+    var sports=["Randonnée","Vélo","Chasse sous-marine","Escalade","Footing","Slackline","Skateboarding","Base Jump"];
+    var sport;
     var item={};
     for (var i=0;i<100;i++) {
         for (var j=0;j<100;j++) {
+            sport =  sports[Math.floor(Math.random() * sports.length)];
             item = {
-                "title": i + '_' + j,
+                "title": sport+ '_' + i + '_' + j,
                 "description": "Yeah",
                 "sports": "Rando",
                 "loc": [i/10,40+j/10],
-                "_id":  i/10 + '_' + j/10
+                "_id":  i/10 + '_' + j/10,
+                "tags": [ sport ]
             };
-             db2.collection('spots', function(err, collection) {
+            db2.collection('spots', function(err, collection) {
                     collection.insert(item, {safe:true}, function(err, result) {
                         if (err) {
                             res.send({'error':'An error has occurred'});
@@ -17,8 +23,25 @@ exports.generate = function(req, res) {
                             console.log('Success: ' + JSON.stringify(result[0]));
                         }
                     });
-                });
+            });
         }
+    }
+    for (var i=0,l=sports.length;i<l;i++) {
+        var tag = {
+            value: sports[i],
+            creationDate: new Date(),
+            modificationDate: new Date(),
+        }
+        db2.collection('tags', function(err, collection) {
+            collection.insert(tag, {safe:true}, function(err, result) {
+                if (err) {
+                    res.send({'error':'An error has occurred'});
+                } else {
+                    console.log('Success: ' + JSON.stringify(result[0]));
+                    res.send(result[0]);
+                }
+            });
+        });
     }
     res.send(item);  
 }
@@ -44,7 +67,7 @@ exports.findAll = function(req, res) {
 
 exports.search = function(req, res) {
     db2.collection('spots', function(err, collection) {
-        collection.find({ 'loc' : { '$near' : [ parseFloat(req.params.lng) , parseFloat(req.params.lat) ] } }).limit(100).toArray(function(err, items) {
+        collection.find({ 'loc' : { '$near' : [ parseFloat(req.params.lng) , parseFloat(req.params.lat) ] }, 'tags': req.params.k }).limit(100).toArray(function(err, items) {
             res.send(items);
         });
     });
@@ -60,6 +83,10 @@ exports.add = function(req, res) {
             } else {
                 console.log('Success: ' + JSON.stringify(result[0]));
                 res.send(result[0]);
+                //update tags
+                for (var i=0,l=spot.tags.length;i<l;i++) {
+                    tags.addIfNew(spot.tags[i]);
+                }
             }
         });
     });

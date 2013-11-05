@@ -7,7 +7,7 @@ app.service('spotsService', function ($http) {
   };
 
   this.searchSpots = function(options) {
-    return $http({method: 'GET', url: 'http://192.168.137.10:5000/API/spots/'+options.lng+'/'+options.lat}).then(function(result) {
+    return $http({method: 'GET', url: 'http://192.168.137.10:5000/API/spots/'+options.k+'/'+options.lng+'/'+options.lat}).then(function(result) {
       return result.data;
     });
   };

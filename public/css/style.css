@@ -15,15 +15,20 @@
 
 .home-slider-top h1
 {
-	margin:40px 0 40px;
+	margin:60px 0 40px;
 	text-shadow: black 0px 3px 1px;
 	font-family: 'Grand Hotel', cursive;
-	font-size:6em
+	font-size:8em
 }
 
 .home-slider-top h3
 {
-	margin-bottom: 40px;
+	font-size:2em;
+	margin-bottom: 70px;
+}
+
+#home-explore-form {
+	margin-bottom: 300px;
 }
 
 .home-slider-top form
@@ -154,11 +159,10 @@
 
 /******** AUTOCOMPLETE STYLING *****/
 
-.autocomplete-suggestions { border: 1px solid #999; background: #FFF; overflow: auto; }
 .autocomplete-suggestions { border: 1px solid #999; background: #FFF; overflow: auto;}
-.autocomplete-suggestion { padding: 2px 5px; white-space: nowrap; overflow: hidden; }
+.autocomplete-suggestion { padding: 4px 5px;  color: #3399FF; font-size:1.5em; white-space: nowrap; overflow: hidden; }
 .autocomplete-selected { background: #F0F0F0; }
-.autocomplete-suggestions strong { font-weight: normal; color: #3399FF; }
+.autocomplete-suggestions strong { font-weight: bold;}
 
 
 /******* NAV BAR ********/

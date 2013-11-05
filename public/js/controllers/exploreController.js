@@ -28,7 +28,7 @@ app.controller('ExploreController', function ($rootScope, $scope, $state, spotsS
 
         spotMap.clear();
 
-        spotsService.searchSpots({lat:$scope.lat,lng:$scope.lng}).then(function(data){
+        spotsService.searchSpots({k:$scope.k,lat:$scope.lat,lng:$scope.lng}).then(function(data){
             $scope.spots = data;
         });
     }
