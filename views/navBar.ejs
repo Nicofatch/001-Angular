@@ -1,3 +1,9 @@
+
+<% if (navbar.search) { %>
+    <% script('/js/dom/lib/autocomplete.js') %>
+    <% script('/js/dom/navBar.js') %>
+<% } %>
+
 <nav class="navbar navbar-default <% if (navbar.fixed) { %> navbar-fixed-top <% } %>" role="navigation" style="margin-bottom:0">
     <div class="navbar-header">
        <!-- APP TITLE -->
@@ -52,6 +58,8 @@
                             <input type="text" class="form-control" style="height:34px;line-height:1.428571429;font-size:14px;" id="l-xs" name="l" placeholder="Around">
                         </div>
                     </div>
+                    <input type="hidden" name="lat" id="lat-xs">
+                    <input type="hidden" name="lng" id="lng-xs">
                     <button id="nav-search-button" type="submit" class="btn btn-primary" style="height:34px;line-height:1.428571429;font-size:14px;">
                         <i class="icon-search icon-white"></i> Find Spots
                     </button>
@@ -76,6 +84,8 @@
                         <input type="text" class="form-control" style="height:34px;line-height:1.428571429;font-size:14px;" id="l" name="l" placeholder="Around">
                     </div>
                 </div>
+                <input type="hidden" name="lat" id="lat">
+                <input type="hidden" name="lng" id="lng">
                 <button id="nav-search-button" type="submit" class="btn btn-primary" style="height:34px;line-height:1.428571429;font-size:14px;"> <i class="icon-search icon-white"></i></button>
             </form>
         <% } %>

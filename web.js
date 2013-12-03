@@ -7,16 +7,11 @@ var express = require('express')
   , maps = require('./api/maps')
   , spots = require('./api/spots')
   , tags = require('./api/tags')
-  , connection = require('./api/connection.js')
-  , db = require('./config/dbschema')
   , pass = require('./config/pass')
   , passport = require('passport')
   , user_routes = require('./routes/user')
   , basic_routes = require('./routes/basic');
 
-// global variables
-BSON = connection.BSON;
-db2 = connection.db;
 Constants = require('./constants');
 
 var app = express();
@@ -61,6 +56,7 @@ app.get('/login',user_routes.getLogin);
 app.post('/login',user_routes.postLogin);
 app.get('/logout',user_routes.logout);
 app.get('/explore',basic_routes.explore);
+app.get('/spot',basic_routes.spot);
 
 // API requests
 app.get('/api/maps',maps.findAll);
@@ -79,6 +75,8 @@ app.delete('/api/tags/:id',tags.delete);
 app.get('/api/spots/generate', spots.generate);
 
 app.get('/api/spots/:k/:lng/:lat',spots.search);
+app.put('/api/spots/:id',spots.update);
+app.get('/api/spots/:id',spots.findById);
 
 var port = process.env.PORT || 5000;
 app.listen(port, function() {

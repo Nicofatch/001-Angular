@@ -1,11 +1,4 @@
-var spotMap;
-
-$(document).ready(function(){
-  // Initialize the map
-  spotMap = new SpotMap('map');
-});
-
-function SpotMap(map_id) {
+function SpotMap(map_id, options) {
 
     this.map_id = map_id;
     // Create the map
@@ -28,9 +21,15 @@ function SpotMap(map_id) {
         });
     osm.addTo(this.map);
 
-    // Set the event receivers
-    this.map.on('locationfound', onLocationFound);
     this.map.on('locationerror', onLocationError);
+
+    if (options.onLocationFound) {
+        this.map.on('locationfound', options.onLocationFound);        
+    }
+    if (options.onPopupOpen) {
+        this.map.on('popupopen', options.onPopupOpen);        
+    }
+
     this.map.setView([48.51, 2.21], 3);
     // Get geolocation and center the map
     //this.geoLocate();
@@ -71,18 +70,42 @@ function SpotMap(map_id) {
         // Center the map on the displayed markers
         if (this.bounds.length)
             this.map.fitBounds(this.bounds, {
-                paddingTopLeft: [($(window).width()/4), 150],
+                paddingTopLeft: [480, 150],
                 paddingBottomRight: [150,150]
             });
     };
 
-    this.focusOnMarker = function (id) {
+    this.focusOnMarker = function (id, options) {
+                    
         var LMarker = this.markers.getItem(id).LMarker;
         // Pan the map to the marker (smooth move)
-        this.map.panTo(LMarker._latlng);
+        if (options.zoom) {
+            var leftPadding = 480;
+            this.map.fitBounds([LMarker._latlng], {
+                paddingTopLeft: [leftPadding, 150],
+                paddingBottomRight: [150,150]
+            });
+        }
+        else
+        {
+            var leftPadding = 480;
+            this.map.fitBounds([this.bounds], {
+                paddingTopLeft: [leftPadding, 150],
+                paddingBottomRight: [150,150]
+            });
+            //this.map.panTo(LMarker._latlng);
+        }
+        
         // Open the popup
         LMarker.openPopup();
     };
+
+    this.closePopup = function (id) {
+        if (id) {
+            var LMarker = this.markers.getItem(id).LMarker;
+            LMarker.closePopup();
+        }   
+    }
 
     this.displayMap = function (position) {
         if (typeof position === "undefined") {
@@ -152,33 +175,6 @@ function SpotMap(map_id) {
 
 };
 
-function onLocationFound(e) {
-    var radius = e.accuracy / 2;
-    var message = "You are within " + radius + " meters from this point";
-
-    // Update geoposition coords
-    //this.geoPosition.coords.latitude = e.latlng.lat;
-    //this.geoPosition.coords.longitude = e.latlng.lng;
-
-    // Create a new marker
-    var marker = new Marker({
-        id: 'geoPosition',
-        latitude: e.latlng.lat,
-        longitude: e.latlng.lng,
-        title: message,
-        draggable: true,
-        icon: 'icon-screenshot icon-large',
-        color: 'red'
-    });
-    
-    // Display the marker
-    // TODO: in the context of this function, "this" is not spotMap, but the map itself so... ugly workaround
-    spotMap.map.addLayer(marker.LMarker);
-
-    // store the marker
-    spotMap.geoPosition.marker = marker;
-};
-
 function onLocationError(e) {
     //TODO
 };
@@ -192,13 +188,21 @@ function Marker(options) {
     if (options.draggable)
         LMarkerOptions.draggable = true;
 
+    if (options.id)
+        LMarkerOptions.id = options.id;
+
     // if a special icon has been specified
-    if (options.icon && options.color) {
-        var icon = L.AwesomeMarkers.icon({
-            icon: options.icon,
+    if (options.awesomeIcon && options.color) {
+        var awesomeIcon = L.AwesomeMarkers.icon({
+            icon: options.awesomeIcon,
             color: options.color
         })
-        LMarkerOptions.icon = icon;
+        LMarkerOptions.icon = awesomeIcon;
+    }
+    // if a special icon has been specified
+    if (options.numberedIcon) {
+        numberedIcon = new L.NumberedDivIcon({number: options.numberedIcon})
+        LMarkerOptions.icon = numberedIcon;
     }
     this.latitude = options.latitude;
     this.longitude = options.longitude;

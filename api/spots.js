@@ -1,4 +1,8 @@
-var tags = require('./tags.js');
+var tags = require('./tags.js'),
+    connection = require('./connection.js');
+
+var db=connection.db;
+var BSON=connection.BSON;
 
 exports.generate = function(req, res) {
     var sports=["Randonnée","Vélo","Chasse sous-marine","Escalade","Footing","Slackline","Skateboarding","Base Jump"];
@@ -12,17 +16,17 @@ exports.generate = function(req, res) {
                 "description": "Yeah",
                 "sports": "Rando",
                 "loc": [i/10,40+j/10],
-                "_id":  i/10 + '_' + j/10,
-                "tags": [ sport ]
+                "tags": [ sport ],
+                "likes": []
             };
-            db2.collection('spots', function(err, collection) {
-                    collection.insert(item, {safe:true}, function(err, result) {
-                        if (err) {
-                            res.send({'error':'An error has occurred'});
-                        } else {
-                            console.log('Success: ' + JSON.stringify(result[0]));
-                        }
-                    });
+            db.collection('spots', function(err, collection) {
+                collection.insert(item, {safe:true}, function(err, result) {
+                    if (err) {
+                        res.send({'error':'An error has occurred'});
+                    } else {
+                        //console.log('Success: ' + JSON.stringify(result[0]));
+                    }
+                });
             });
         }
     }
@@ -32,7 +36,7 @@ exports.generate = function(req, res) {
             creationDate: new Date(),
             modificationDate: new Date(),
         }
-        db2.collection('tags', function(err, collection) {
+        db.collection('tags', function(err, collection) {
             collection.insert(tag, {safe:true}, function(err, result) {
                 if (err) {
                     res.send({'error':'An error has occurred'});
@@ -49,7 +53,7 @@ exports.generate = function(req, res) {
 exports.findById = function(req, res) {
     var id = req.params.id;
     console.log('Retrieving spot with _id = [ ' + id + ']');
-    db2.collection('spots', function(err, collection) {
+    db.collection('spots', function(err, collection) {
         collection.findOne({'_id':new BSON.ObjectID(id)}, function(err, item) {
             // Wrap the location in a root element called "spot".
             res.json(item);
@@ -58,7 +62,7 @@ exports.findById = function(req, res) {
 };
  
 exports.findAll = function(req, res) {
-    db2.collection('spots', function(err, collection) {
+    db.collection('spots', function(err, collection) {
         collection.find().toArray(function(err, items) {
 	    res.send(tems);
         });
@@ -66,8 +70,13 @@ exports.findAll = function(req, res) {
 };
 
 exports.search = function(req, res) {
-    db2.collection('spots', function(err, collection) {
-        collection.find({ 'loc' : { '$near' : [ parseFloat(req.params.lng) , parseFloat(req.params.lat) ] }, 'tags': req.params.k }).limit(100).toArray(function(err, items) {
+    db.collection('spots', function(err, collection) {
+        // Build search query
+        var query = { 'loc' : { '$near' : [ parseFloat(req.params.lng) , parseFloat(req.params.lat) ] } };
+        if (req.params.k != 'All Sports')
+             query.tags = req.params.k;
+        // Perform query
+        collection.find(query).limit(30).toArray(function(err, items) {
             res.send(items);
         });
     });
@@ -76,7 +85,7 @@ exports.search = function(req, res) {
 exports.add = function(req, res) {
     var spot = req.body.spot;
     console.log('Adding spot: ' + JSON.stringify(spot));
-    db2.collection('spots', function(err, collection) {
+    db.collection('spots', function(err, collection) {
         collection.insert(spot, {safe:true}, function(err, result) {
             if (err) {
                 res.send({'error':'An error has occurred'});
@@ -94,16 +103,17 @@ exports.add = function(req, res) {
  
 exports.update = function(req, res) {
     var id = req.params.id;
-    var spot = req.body.spot;
+    var spot = req.body;
     console.log('Updating spot: ' + id);
     console.log(JSON.stringify(spot));
-    db2.collection('spots', function(err, collection) {
+    db.collection('spots', function(err, collection) {
         collection.update({'_id':new BSON.ObjectID(id)}, spot, {safe:true}, function(err, result) {
             if (err) {
                 console.log('Error updating spot: ' + err);
                 res.send({'error':'An error has occurred'});
             } else {
                 console.log('' + result + ' document(s) updated');
+                spot._id = id;
                 res.send(spot);
             }
         });
@@ -113,7 +123,7 @@ exports.update = function(req, res) {
 exports.delete = function(req, res) {
     var id = req.params.id;
     console.log('Deleting spot: ' + id);
-    db2.collection('spots', function(err, collection) {
+    db.collection('spots', function(err, collection) {
         collection.remove({'_id':new BSON.ObjectID(id)}, {safe:true}, function(err, result) {
             if (err) {
                 res.send({'error':'An error has occurred - ' + err});
@@ -157,7 +167,7 @@ var populateDB = function() {
         }
     ];
  
-    db2.collection('spots', function(err, collection) {
+    db.collection('spots', function(err, collection) {
         collection.insert(spots, {safe:true}, function(err, result) {});
     });
  

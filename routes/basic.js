@@ -36,3 +36,16 @@ exports.explore = function(req,res) {
 	});
   	req.session.messages = null;	
 }
+
+exports.spot = function(req,res) {
+	res.render("spot", {
+	  title: Constants.APP_NAME,
+	  user: req.user,
+	  message: req.session.messages,
+	  navbar: {
+	  	fixed: true,
+	  	search: true
+	  }
+	});
+  	req.session.messages = null;	
+}
