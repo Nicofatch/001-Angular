@@ -1,0 +1,36 @@
+<% layout('layout') -%>
+<!-- Stylesheets -->
+<% stylesheet('http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.css') -%>
+<!-- stylesheet('/css/vendor/leaflet.css') -%>-->
+<% stylesheet('/css/vendor/leaflet.awesome-markers.css') -%>
+<% stylesheet('/css/vendor/select2.css') -%>
+
+<% stylesheet('/css/spot.css') -%>
+
+<!-- VENDOR JS -->
+<!-- script('//ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js') -%>-->
+<% script('/js/vendor/angular.js') -%>
+<% script('/js/vendor/angular-ui-router.js') -%>
+<% script('/js/vendor/ui-utils.min.js') -%>
+<% script('http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.js') -%>
+<!-- script('/js/vendor/leaflet.js') -%>-->
+<% script('/js/vendor/leaflet.awesome-markers.js') -%>
+<% script('/js/dom/lib/leaflet.numbered-markers.js') -%>
+
+<% script('/js/vendor/jquery.autocomplete.min.js') -%>
+
+<!-- APP -->
+<% script('/js/app/app.js') -%>
+<% script('/js/app/spot/spot.js') -%>
+<% script('/js/common/services/spotsService.js') -%>
+<% script('/js/common/services/utilsService.js') -%>
+<% script('/js/common/directives/displayMarkers.js') -%>
+<% script('/js/common/directives/map/map.js') -%>
+
+<!-- DOM -->
+<!--<div class="panel panel-default" data-ui-view="">-->
+  <!-- see public/js/partials/map.js -->
+<!--</div>-->
+<div class="container">
+    <div data-ui-view=""></div>
+</div>

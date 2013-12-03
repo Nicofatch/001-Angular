@@ -1,0 +1,39 @@
+ <div id="spots-left-bar">
+
+  <div class="panel panel-default" style="margin-bottom:0px">
+    <div class="panel-body">
+
+      <div class="pull-right">
+        <a style="width:45px;"  class="btn btn-default btn-lg"><i class="icon-link"></i></a>
+        <a style="display:none"  class="btn btn-default btn-lg" ng-click="explore()"><i style="font-size:1em;" class="icon-arrow-right"></i></a>
+      </div>
+      <span >
+        <h1 id="map-title" class="">Explore</h1>
+        <p>Results for <b>{{k}}</b> around <b>{{l}}</b> </p>
+      </span>
+    </div>
+  </div>
+
+
+  <div spot-list>
+      <map style="position:fixed;right:0;left:0;top:51px;bottom:0;z-index:-1" mode="explore" onPopupOpen="onPopupOpen"></map> 
+      <div data-ng-repeat="spot in spots" spot-item spot="{{spot}}" index="{{$index}}" last="{{$last}}" onLike="like(spot)"></div>
+  </div>
+
+  <div ui-view="main" id="spots-main">
+
+  </div>
+  
+
+  <!-- JS DOM -->
+  <script>
+  $(document).ready(function(){
+
+    $('.header-tabs a').click(function (e) {
+      e.preventDefault()
+      $(this).tab('show')
+    })
+    $('.header-tabs a:first').tab('show');
+
+  });
+  </script>

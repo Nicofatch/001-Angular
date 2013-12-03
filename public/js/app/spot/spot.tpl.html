@@ -1,0 +1,79 @@
+<div class="panel panel-default">
+	<!-- PANEL HEADING -->
+ 	<div class="panel-heading">
+		<!-- AddThis Button BEGIN -->
+		<div class="addthis_toolbox addthis_default_style ">
+		      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+		      <a class="addthis_button_tweet"></a>
+		      <a class="addthis_button_pinterest_pinit"></a>
+		      <a class="addthis_counter addthis_pill_style"></a>
+		</div>
+		<script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
+		<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-520613fc20d317d5"></script>
+		<!-- AddThis Button END -->
+  	</div>
+
+	<!-- PANEL BODY -->
+	<div class="panel-body">
+		<!-- MAP TITLE -->
+		<div class="row" style="margin-bottom:10px;">
+			<div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+				<h1 id="map-title">{{spot.title}}</h1>
+				<p>{{spot.description}}</p>
+			</div>
+			<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+				<div id="map-tags-container">        
+					<div class="row">&nbsp;</div>
+					<span id="map-tags">
+						<span data-ng-repeat="tag in spot.tags" style="display:inline-block">
+							<button class="btn btn-link btn-tag">
+								<span class="label label-primary">x {{tag}}</span>
+							</button>
+						</span>
+					</span>
+				</div>
+			</div>
+		</div>
+
+
+		<!-- LEFT ZONE -->
+		<div  style="clear:both" id="map-left" class="col-lg-8">      
+		  <!-- TABS -->
+		  <div class="panel panel-default">
+		          <ul class="nav nav-tabs header-tabs">
+		                  <li><a href="#home" data-toggle="tab">Home</a></li>
+		                  <li><a href="#discussions" data-toggle="tab">Discussions <span class="badge">124</span></a></li>
+		                  <li><a href="#messages" data-toggle="tab">Messages</a></li>
+		                  <li><a href="#settings" data-toggle="tab">Settings</a></li>
+		          </ul>
+		          <div class="panel-body">
+		                  <p>Bla bla</p>
+		          </div>
+		  </div>
+		</div>
+
+		<!-- RIGHT ZONE -->
+		<div id="map-right" class="col-lg-4">
+			<!-- MAP -->
+			<div class="panel panel-default">
+				<div class="panel-body">
+					<map spot="{{spot}}" mode="single" class="map"></map>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- JS DOM -->
+<script>
+
+	$(document).ready(function(){
+
+	    $('.header-tabs a').click(function (e) {
+	            e.preventDefault()
+	            $(this).tab('show')
+	    })
+	    $('.header-tabs a:first').tab('show')
+	});
+
+</script>
