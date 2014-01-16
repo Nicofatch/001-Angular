@@ -14,9 +14,10 @@ app.service('spotsService', function ($http,appSettings) {
   };
 
   this.updateSpot = function (spot) {
-    var spot_id = spot._id;
-    delete spot._id;
-    return $http({method: 'PUT', url: appSettings.apiServer + appSettings.apiUri + '/spots/'+spot_id, data:spot}).then(function(result) {
+    var spotCopy = jQuery.extend({}, spot);
+    var spot_id = spotCopy._id;
+    delete spotCopy._id;
+    return $http({method: 'PUT', url: appSettings.apiServer + appSettings.apiUri + '/spots/'+spot_id, data:spotCopy}).then(function(result) {
       return result.data;
     });
   };

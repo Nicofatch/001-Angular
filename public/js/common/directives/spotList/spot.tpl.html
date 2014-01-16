@@ -15,11 +15,11 @@
               </div>
               <div class="btn-group">
                 <!-- <button class="btn btn-default" ng-click="like(index);$event.stopPropagation()"><span style="font-size:1em;"><i class="icon-heart"></i></span></button> -->
-                <button class="btn btn-default" ng-click=""><span style="font-size:1em;"><i class="icon-heart"></i></span></button>
+                <button class="btn btn-default" ng-click="like($index);$event.stopPropagation()"><span style="font-size:1em;"><i class="icon-heart"></i></span></button>
                 <button class="btn btn-default" disabled style="padding-left:3px;padding-right:3px;"><span style="font-size:1em;"><b>{{likes.length}}</b></span></button>
               </div>
             </div>
-            <a href="/spot/#/{{spot._id}}" role="spot-title"><b>{{title}}</b></a></br>
+            <a href="/spot/#/{{_id}}" role="spot-title" ng-click="$event.stopPropagation()"><b>{{title}}</b></a></br>
             <div id="map-tags-container">        
               <span id="map-tags">
                 <span data-ng-repeat="tag in tags" style="display:inline-block">

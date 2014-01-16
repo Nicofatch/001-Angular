@@ -78,12 +78,11 @@ angular.module('directives.spotList')
     transclude:true,              // It transcludes the contents of the directive into the template
     replace: true,                // The element containing the directive will be replaced with the template
     templateUrl:'/js/common/directives/spotList/spot.tpl.html',
-    scope:{ spot:'@', index:'@', last:'@', onLike:'@' },        // Create an isolated scope and interpolate the spot attribute onto this scope
+    scope:{ spot:'@', index:'@', last:'@', onLike:'&', isSelected:'@' },        // Create an isolated scope and interpolate the spot attribute onto this scope
     link: function(scope, element, attrs, spotListCtrl) {
       var getIsSelected, setIsSelected;
-
+      
       spotListCtrl.addSpot(scope);
-
       scope.isSelected = false;
       
       var spotObj;
@@ -96,6 +95,7 @@ angular.module('directives.spotList')
           scope.isSelected = !!value;
         });
       }
+
       scope.$watch('index', function(value) {
         scope.displayIndex = parseInt(value) + 1;
       });
@@ -109,9 +109,6 @@ angular.module('directives.spotList')
         scope.description = spotObj.description;
         scope.loc = spotObj.loc;
 
-        //console.log('displaying new marker - ' + spot._id);
-
-        // console.log(spot._id);
         // Create a marker
         var marker = new Marker({
           id: scope._id,
@@ -125,7 +122,6 @@ angular.module('directives.spotList')
         });
         
         // Add the marker to the map
-        
         spotListCtrl.mapScope.spotMap.addMarker(marker);
         if (scope.last === 'true') {
           spotListCtrl.mapScope.spotMap.fitOnBounds();
@@ -135,20 +131,24 @@ angular.module('directives.spotList')
       scope.$watch('isSelected', function(value) {
         if ( value ) {
           spotListCtrl.unselectOthers(scope);
-          console.log(spotObj._id);
           spotListCtrl.mapScope.spotMap.focusOnMarker(spotObj._id,{zoom:false});
         }
         if ( setIsSelected ) {
           setIsSelected(spotListCtrl.scope, value);
         }
       });
+
+      scope.like = function(index) {
+        //scope.isSelected=true;
+        scope.onLike(index);
+      }
     }
   };
 }])
 
 .directive('map', ['mapFactory','Marker','utilsService', function(mapFactory,Marker,utilsService){
   return {
-      require: '^spotList',
+      require: '?^spotList',
       restrict: 'E',
       template: '<div id="spotMap"></div>',
       transclude: true,
@@ -159,14 +159,15 @@ angular.module('directives.spotList')
       },
       link: function(scope, element, attrs, spotListCtrl) {
         
-        spotListCtrl.addMap(scope);
+        if (typeof spotListCtrl !== "undefined")
+          spotListCtrl.addMap(scope);
 
         scope.$watch('spot',function(value){
-          if (!value)
-              return;
+          if (!value || (value == "{}"))
+            return;
           spot = JSON.parse(value);
           // if a "scope" attr is filled, display a single spot at the center of the map
-          scope.map = new mapFactory('spotMap',{
+          scope.spotMap = new mapFactory('spotMap',{
             onLocationFound:onLocationFound,
             onLocationError:onLocationError,
             onPopupOpen:onPopupOpen,
@@ -195,6 +196,11 @@ angular.module('directives.spotList')
                   padding:[480,150,150,150]
             });
             scope.spotMap.map.setView([48.51, 2.21], 3);
+            /*console.log('try to locate...');
+            scope.spotMap.map.locate({
+                setView: true,
+                maxZoom: 18
+            });*/
           }
         });
 

@@ -43,7 +43,7 @@ exports.spot = function(req,res) {
 	  user: req.user,
 	  message: req.session.messages,
 	  navbar: {
-	  	fixed: true,
+	  	fixed: false,
 	  	search: true
 	  }
 	});

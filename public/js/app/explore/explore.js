@@ -18,7 +18,7 @@ angular.module('explore')
 .controller('ExploreController', function ($scope, $state, spotsService, utilsService, $stateParams, $location) {
 
     $scope.spots = {};
-    $scope.spotMap = {};
+    //$scope.spotMap = {};
 
     init();
 
@@ -60,9 +60,14 @@ angular.module('explore')
 
             } else {*/
                 // Use geolocation
-            $scope.l = "My Location"
-            $scope.spotMap.geoLocate();
-            /*}*/
+            $scope.l = "My Location";
+            getCurrentLocation(function(location){
+                console.log(location);
+                spotsService.searchSpots({k:$scope.k,lat:location.coords.latitude,lng:location.coords.longitude}).then(function(data){
+                    $scope.spots = data;
+                });
+            });
+            $scope.location = true;
         } else {
             spotsService.searchSpots({k:$scope.k,lat:$scope.lat,lng:$scope.lng}).then(function(data){
                 $scope.spots = data;
@@ -75,14 +80,15 @@ angular.module('explore')
         $("#l").val($scope.l);
     }
 
+    function getCurrentLocation(onLocationFound) {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(onLocationFound);
+        }
+    }
 
     $scope.like = function(index) {
-        alert('i like it');
-        /*$scope.spots[index].likes.push("Nicolas");
-        spotsService.updateSpot($scope.spots[index]).then(function(data){
-            $scope.spots[index] = data;
-            $scope.selectSpot($scope.spots[index]._id);
-        });*/
+        $scope.spots[index].likes.push("Nicolas");
+        spotsService.updateSpot($scope.spots[index]);
     }
 
     /*$scope.isSelected = function (spot) {

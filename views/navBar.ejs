@@ -75,13 +75,15 @@
                 <div id="nav-search-spot" class="form-group col-lg-5 col-md-5 col-sm-5">
                     <div class="input-group">
                         <span class="input-group-addon" style="height:34px;line-height:1.428571429;font-size:14px;"><i class="icon-map-marker"></i></span>
-                        <input type="text" class="form-control" style="height:34px;line-height:1.428571429;font-size:14px;" id="k" name="k" placeholder="Search">
+                        <input type="text" class="form-control" style="height:34px;line-height:1.428571429;font-size:14px;" id="k" name="k" placeholder="Search"
+                        onblur="if (this.value == '') {this.value = 'All Sports';}" onfocus="this.value = ''" />
                     </div>
                 </div>
                 <div id="nav-search-location" class="form-group col-lg-5 col-md-5 col-sm-5">
                     <div class="input-group">
                         <span class="input-group-addon" style="height:34px;line-height:1.428571429;font-size:14px;"><i class="icon-location-arrow"></i></span>
-                        <input type="text" class="form-control" style="height:34px;line-height:1.428571429;font-size:14px;" id="l" name="l" placeholder="Around">
+                        <input type="text" class="form-control" style="height:34px;line-height:1.428571429;font-size:14px;" id="l" name="l" placeholder="Around"
+                        onblur="if (this.value == '') {this.value = 'My Location';}" onfocus="this.value = ''"  />
                     </div>
                 </div>
                 <input type="hidden" name="lat" id="lat">

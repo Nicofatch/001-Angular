@@ -418,3 +418,24 @@
 	background: #e6e6e6;
 	padding: 15px 0 10px;
 }
+
+/******* Slideshow *******/
+.amazingslider-watermark-0 {
+	display:none!important;
+}
+
+.amazingslider-slider-0 {
+	margin-left:0 !important;
+}
+
+.amazingslider-text-0 {
+	margin-bottom: 8px;
+}
+
+.amazingslider-bottom-shadow-0 {
+	display:none !important;
+}
+
+.amazingslider-slider-0 {
+	border-bottom:0 !important;
+}
